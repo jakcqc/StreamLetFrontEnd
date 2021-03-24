@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router,NavigationEnd} from '@angular/router';
 import { identifierModuleUrl } from '@angular/compiler';
+import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -26,10 +27,26 @@ export class HomePage {
     "",
     "",
     "",
-    ""
+    "https://www.godisinthetvzine.co.uk/wp-content/uploads/2020/06/IMG_20200602_120716_501.jpg"
   ]
-  constructor(navCtrl: NavController, private router: Router) {
-    
+  colors = [
+    "darkred",
+    "green",
+    "lightblue",
+    "mediumslateblue",
+    "darkyellow",
+    "purple",
+    "red",
+    "mediumblue"
+  ]
+  width;
+  height;
+  constructor(navCtrl: NavController, private router: Router, platform: Platform) {
+    platform.ready().then(() => {
+      this.width = platform.width();
+      
+      this.height = platform.height();
+    });
   }
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
@@ -38,17 +55,49 @@ export class HomePage {
       posters[x].attributes[1].value = this.cardNumber[x]; 
       x++
     }
+    
+    this.setGenreColor();
   }
   routePage(name){
     this.router.navigate([name]);
   }
   movieInfo(movieInfo){
-    console.log(movieInfo);
+    
     document.getElementById("contentWrapper").style.display = "block";
+    const movieImage = document.getElementById("movieImageCard");
     let cMain = document.getElementById("contentMain");
-    cMain.style.left = "30%";
-    cMain.style.height = "90%";
-    cMain.style.width = "40%";
+    
+   let currentWidth;
+    
+    if(this.width < 800){
+      
+      cMain.style.width = "85%";
+      currentWidth = .85;
+      cMain.style.left = "7%";
+      movieImage.style.backgroundPosition = "none";
+    }
+    else{
+      cMain.style.width = "40%";
+      currentWidth = .40;
+
+      cMain.style.left = "30%";
+      movieImage.style.backgroundPosition = "center";
+    }
+    cMain.style.right = "none";
+    
+    cMain.style.height = "85%";
+    this.populateCard(movieImage,currentWidth);
+    
+  }
+  populateCard(movieImage,currentWidth){
+    const displayer = document.getElementById("cardMain");
+    displayer.style.display = "block";
+    
+    movieImage.style.backgroundImage = "url('https://i.pinimg.com/564x/fc/95/ca/fc95ca81ca34fba083e38fa6406c87be.jpg')";
+    
+    const widther = this.height*.85;
+    movieImage.style.height = widther.toString() + "px";
+    
     
   }
   getMovieImage(cNum){
@@ -73,7 +122,29 @@ export class HomePage {
       document.getElementById("contentMain").style.right = "100%";
     }
     document.getElementById("contentWrapper").style.display = "none";
+    document.getElementById("contentMain").style.width = "0%";
+    const displayer = document.getElementById("cardMain");
+    displayer.style.display = "none";
+    
   }
+  getMovieTitles(){
 
+  }
+  getMovieGenre(){
+
+  }
+  setGenreColor(){
+    const test = document.querySelectorAll<HTMLElement>('.genreTitle');
+    
+    let i = 0;
+    let curColor;
+    
+    test.forEach(element => {
+      element.style.textDecorationColor = this.colors[i];
+      i++;
+
+    });
+  
+  }
 
 }

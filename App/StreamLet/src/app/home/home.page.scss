@@ -1,42 +1,51 @@
 .container {
-  width: 90%;
+  width: 98%;
   text-align: left;
 }
 ion-grid{
-  margin-left: 5%;
-  margin-top: 5%;
+  margin-left: 2%;
+  margin-top: 2%;
 }
 ion-row{
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 #account{
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 1px;
   height: auto;
   width: auto;
   margin-right: 20px;
-  background-color: rgb(212, 212, 82);
-  color: black;
-  transition: .1s;
+  background-color: none;
+  color: rgb(238, 238, 238);
+  transition: .2s;
   padding: 10px;
+  box-shadow: 1px 1px 2px black;
+  border: 2px solid rgb(243, 243, 243);
+  user-select: none;
 }
 #account:hover{
-  background-color: rgb(247, 147, 147);
+  border-radius: 0px;
+  box-shadow: 3px 3px  rgb(247, 247, 247);
+  color: white;
+  //background-color: rgb(250, 250, 250);
+  
+  
 }
 #contentWrapper{
-  position: absolute;
+  position: fixed;
   display: none;
   height: 100%;
   width: 100%;
+  top: 0;
   background-color: rgb(15, 15, 15);
-  opacity: .55;
+  opacity: .65;
   z-index: 5;
 }
 #contentMain{
   display: block;
-  position: absolute;
+  position: fixed;
   top: 10%;
-  left: 30%;
+  //left: 30%;
   height: 0%;
   width: 40%;
   background-color: black;
@@ -45,20 +54,33 @@ ion-row{
   border-radius: 10px;
   transition: .4s;
 }
+#cardMain{
+  display: none;
+  
+}
+#movieImageCard{
+  padding: 14px;
+  position: relative;
+  width: auto;
+  background-repeat: no-repeat;
+  //background-position: center;
+  background-size: contain;
+}
+
 ion-slide{
   
-  height: 380px;
-  width: 200px;
+  height: 360px;
+  width: 220px;
   transition: height .5s;
   text-align: center;
-  margin-top: 15px;
+  margin-top: 10px;
   transition:  .3s;
   
 
 }
 ion-slide:hover{
   z-index: 10; 
-  width: 230px;
+  width: 250px;
   font-size: 0px;
   //color: rgb(255, 111, 171);
   // margin-right: -15px;
@@ -69,13 +91,21 @@ ion-slide:hover{
   height: 550px;
   width: 320px;
 }
-#comedies:hover{
-  
-}
+
 .container span {
   font-size: 30px;
   font-weight: bold;
+  text-decoration: underline;
+   text-decoration-thickness: 5px;
   
+  line-height: 26pt;
   //line-height: 26px;
+}
+#logo{
+  height: 60px;
+}
+#titleBackground{
+  display: inline-block;
+  //background-color: rgb(251, 243, 253);
 }
 
