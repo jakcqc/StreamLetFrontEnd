@@ -144,11 +144,11 @@ export class HomePage {
     //movieImage.style.backgroundImage = "url('/assets/theShining.jpg')";
     
     let cImage = document.getElementById("imageOnCard");
-    cImage.setAttribute( 'src','/assets/theShining.jpg');
+    cImage.setAttribute( 'src','assets/theShining.jpg');
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
     const result = async function getImageColor (){
-      await analyze('/assets/theShining.jpg');
+      await analyze('assets/theShining.jpg');
     }
     console.log(result[0]);
     
