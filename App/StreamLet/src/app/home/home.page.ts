@@ -66,8 +66,16 @@ export class HomePage {
       
       this.height = platform.height();
       const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+      
+      
+      
+      
       if(this.width < 800){
-        
+      const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
+      
+      buttonHolder.forEach(element => {
+        element.style.display = "none";
+      });
       slides.forEach(element => {
         element.style.width = "100px";
         element.style.height = "auto";
