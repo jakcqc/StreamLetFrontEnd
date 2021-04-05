@@ -7,7 +7,11 @@ export class MovieServiceService {
 
   constructor() { }
   cardImage = [];
-  
+  streamer = [
+    "netflix",
+    "hulu",
+    "amazon"
+  ];
   getMovieImage(totalMovies){
     //this is where api backend call happens to get movie images when first populating the page
     //right now using psuedo data for testing 
@@ -33,6 +37,12 @@ export class MovieServiceService {
 
     //returns total movie object 
     return totalMovies;
+  }
+  getMovieroute(route){
+    //get the route url to reoute to the right movie
+    //should call api to get url then return something like https://www.netflix.com/search?q=... for something like netflix etc.
+    return this.streamer[route];
+    
   }
   
 }

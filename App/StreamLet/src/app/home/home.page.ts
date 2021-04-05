@@ -6,6 +6,8 @@ import { Platform } from '@ionic/angular';
 import { MovieServiceService } from '../services/movie-service.service';
 import { IonSlides} from '@ionic/angular';
 
+import analyze from 'rgbaster';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -52,7 +54,8 @@ export class HomePage {
     "darkgreen",
     "cyan",
     "darkcyan"
-  ]
+  ];
+  
   width;
   height;
   constructor(navCtrl: NavController, private router: Router, 
@@ -62,7 +65,21 @@ export class HomePage {
       this.width = platform.width();
       
       this.height = platform.height();
+      const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+      if(this.width < 800){
+        
+      slides.forEach(element => {
+        element.style.width = "100px";
+        element.style.height = "auto";
+      });
+      }else{
+        slides.forEach(element => {
+          element.style.width = "160px";
+          element.style.height = "auto";
+        });
+      }
     });
+    
   }
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
@@ -76,6 +93,8 @@ export class HomePage {
       posters[x].attributes[1].value = this.totalMovieGenres.reccomended[x]; 
       x++
     }
+
+   
   }
   routePage(name){
     this.router.navigate([name]);
@@ -90,9 +109,9 @@ export class HomePage {
     
     if(this.width < 800){
       
-      cMain.style.width = "85%";
-      currentWidth = .85;
-      cMain.style.left = "7%";
+      cMain.style.width = "100%";
+      currentWidth = 1;
+      cMain.style.left = "0%";
       movieImage.style.backgroundPosition = "none";
     }
     else{
@@ -114,13 +133,24 @@ export class HomePage {
     const displayer = document.getElementById("cardMain");
     displayer.style.display = "block";
     
-    movieImage.style.backgroundImage = "url('https://i.pinimg.com/564x/fc/95/ca/fc95ca81ca34fba083e38fa6406c87be.jpg')";
+    //movieImage.style.backgroundImage = "url('/assets/theShining.jpg')";
     
+    let cImage = document.getElementById("imageOnCard");
+    cImage.setAttribute( 'src','/assets/theShining.jpg');
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
+    const result = async function getImageColor (){
+      await analyze('/assets/theShining.jpg');
+    }
+    console.log(result[0]);
+    
+    //console.log(result[0].color);
+    
+    document.getElementById("cardMain").style.backgroundColor = "black";
     
     
   }
+
   resetNorm(){
     let animation = Math.floor(Math.random() * Math.floor(3));
 
@@ -147,6 +177,15 @@ export class HomePage {
 
   }
   getMovieGenre(){
+
+  }
+  streamingServiceRoute(route){
+    //reroute the user to the proper video route 
+    //call the api to get the right data for the reroute 
+    
+    route = this.movies.getMovieroute(route);
+    console.log(route);
+    
 
   }
   setGenreColor(){
