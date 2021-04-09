@@ -6,6 +6,7 @@ export class Card {
     cast: string[];
     overview: string;
     posterURL: string[];
+    imdbRating: number;
 
     constructor(userResponse: any){
         this.title = userResponse.title;
@@ -15,6 +16,7 @@ export class Card {
         this.cast = userResponse.cast;
         this.overview = userResponse.overview;
         this.posterURL = userResponse.posterURLs;
+        this.imdbRating = userResponse.imdbRating;
     }
 
     getTitle() {
@@ -131,5 +133,9 @@ export class Card {
 
     getPoster(){
         return this.posterURL["original"];
+    }
+
+    getImdbRating(){
+        return this.imdbRating;
     }
 }

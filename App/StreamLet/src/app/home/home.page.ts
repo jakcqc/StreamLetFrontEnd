@@ -5,6 +5,8 @@ import { identifierModuleUrl } from '@angular/compiler';
 import { Platform } from '@ionic/angular';
 import { MovieServiceService } from '../services/movie-service.service';
 import { IonSlides} from '@ionic/angular';
+import { Card } from '../models/card.model';
+import { HttpClient } from '@angular/common/http';
 
 import analyze from 'rgbaster';
 
@@ -22,6 +24,9 @@ export class HomePage {
   cards = [
     "Example","After",2,3,4,5,6,7,8,9,10,11,12,13,14,15
   ]
+  cardsNew = [];
+  cardsAction = [];
+  cardsComedy = [];
 
   //total movie types to presented on the main page
   //first load fills these with the movie images
@@ -59,7 +64,7 @@ export class HomePage {
   width;
   height;
   constructor(navCtrl: NavController, private router: Router, 
-    platform: Platform, public movies: MovieServiceService,
+    platform: Platform, public movies: MovieServiceService, private http: HttpClient
     ) {
     platform.ready().then(() => {
       this.width = platform.width();
@@ -96,12 +101,8 @@ export class HomePage {
     
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
-    //set movie images of selected cards
-    //
-    while(x<15){
-      posters[x].attributes[1].value = this.totalMovieGenres.reccomended[x]; 
-      x++
-    }
+    this.getComedies();
+    this.getAction();
 
    
   }
@@ -211,4 +212,35 @@ export class HomePage {
   
   }
 
+  getComedies(){
+    this.http.get('http://localhost:9091/broadQuery?genre=35').toPromise().then(
+      data => {
+        console.log(data);
+        let parsedData = JSON.parse(JSON.stringify(data));
+        for(let i = 0; i < parsedData.length; i++){
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          this.cardsComedy.push(card);
+        }
+      }
+    );
+  }
+
+  getAction(){
+    this.http.get('http://localhost:9091/broadQuery?genre=28').toPromise().then(
+      data => {
+        console.log(data);
+        let parsedData = JSON.parse(JSON.stringify(data));
+        console.log(parsedData.length);
+
+        for(let i = 0; i < parsedData.length; i++){
+          console.log("HERE");
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          console.log(card);
+          this.cardsAction.push(card);
+        }
+      }
+    );
+  }
 }
