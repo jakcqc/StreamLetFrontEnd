@@ -110,7 +110,6 @@ export class HomePage {
     this.router.navigate([name]);
   }
   movieInfo(movieInfo){
-    
     document.getElementById("contentWrapper").style.display = "block";
     const movieImage = document.getElementById("movieImageCard");
     let cMain = document.getElementById("contentMain");
@@ -136,21 +135,24 @@ export class HomePage {
     cMain.style.height = tempHeight.toString() + "px";
     
     
-    this.populateCard(movieImage,currentWidth);
+    this.populateCard(movieImage,currentWidth, movieInfo);
     
   }
-  populateCard(movieImage,currentWidth){
+  populateCard(movieImage,currentWidth, movieInfo){
     const displayer = document.getElementById("cardMain");
     displayer.style.display = "block";
     
-    //movieImage.style.backgroundImage = "url('/assets/theShining.jpg')";
     
-    let cImage = document.getElementById("imageOnCard");
-    cImage.setAttribute( 'src','assets/theShining.jpg');
+    document.getElementById("imageOnCard").setAttribute( 'src',movieInfo.getPoster());
+    document.getElementById("cardTitle").innerHTML = movieInfo.getTitle();
+    document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
+    document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
+    document.getElementById("cardCast").innerHTML = movieInfo.getCast();
+
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
     const result = async function getImageColor (){
-      await analyze('assets/theShining.jpg');
+      await analyze(movieInfo.getPoster());
     }
     console.log(result[0]);
     
@@ -215,7 +217,6 @@ export class HomePage {
   getComedies(){
     this.http.get('http://localhost:9091/broadQuery?genre=35').toPromise().then(
       data => {
-        console.log(data);
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
           let obj = parsedData[i];
@@ -229,15 +230,11 @@ export class HomePage {
   getAction(){
     this.http.get('http://localhost:9091/broadQuery?genre=28').toPromise().then(
       data => {
-        console.log(data);
         let parsedData = JSON.parse(JSON.stringify(data));
-        console.log(parsedData.length);
 
         for(let i = 0; i < parsedData.length; i++){
-          console.log("HERE");
           let obj = parsedData[i];
           let card = new Card(obj);
-          console.log(card);
           this.cardsAction.push(card);
         }
       }

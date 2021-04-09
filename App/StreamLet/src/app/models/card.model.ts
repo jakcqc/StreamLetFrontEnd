@@ -4,6 +4,7 @@ export class Card {
     year: number;
     runtime: number;
     cast: string[];
+    directors: string[];
     overview: string;
     posterURL: string[];
     imdbRating: number;
@@ -14,6 +15,7 @@ export class Card {
         this.year = userResponse.year;
         this.runtime = userResponse.runtime;
         this.cast = userResponse.cast;
+        this.directors = userResponse.significants;
         this.overview = userResponse.overview;
         this.posterURL = userResponse.posterURLs;
         this.imdbRating = userResponse.imdbRating;
@@ -128,7 +130,11 @@ export class Card {
     }
 
     getCast(){
-        return this.cast;
+        return this.cast[0] + ", " +this.cast[1] + ", " +this.cast[2];
+    }
+
+    getDirectors(){
+        return this.directors;
     }
 
     getPoster(){
