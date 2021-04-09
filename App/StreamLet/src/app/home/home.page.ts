@@ -27,6 +27,8 @@ export class HomePage {
   cardsNew = [];
   cardsAction = [];
   cardsComedy = [];
+  intComedy = 1;
+  intAction = 1;
 
   //total movie types to presented on the main page
   //first load fills these with the movie images
@@ -101,8 +103,10 @@ export class HomePage {
     
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
+
     this.getComedies();
     this.getAction();
+
 
    
   }
@@ -215,7 +219,7 @@ export class HomePage {
   }
 
   getComedies(){
-    this.http.get('http://localhost:9091/broadQuery?genre=35').toPromise().then(
+    this.http.get('http://localhost:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
@@ -225,10 +229,13 @@ export class HomePage {
         }
       }
     );
+    this.intComedy++;
+    if(this.intComedy == 2)
+      this.getComedies();
   }
 
   getAction(){
-    this.http.get('http://localhost:9091/broadQuery?genre=28').toPromise().then(
+    this.http.get('http://localhost:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
 
@@ -239,5 +246,8 @@ export class HomePage {
         }
       }
     );
+    this.intAction++;
+    if(this.intAction == 2)
+      this.getAction();
   }
 }

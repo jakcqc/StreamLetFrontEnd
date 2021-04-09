@@ -60,7 +60,7 @@
 	           </ion-slides>
         </div>
         <div class = "bHolder">
-          <div class ="buttons" (click)="slides.slidePrev()" > < </div>
+          <div class ="buttons" (click)="slides.slidePrev()" > </div>
             <div class ="buttons" (click)="slides.slideNext()" > > </div>
         </div>
     </ion-row>
@@ -104,7 +104,7 @@
     <ion-row>
         <div class="container">
             <span class = "genreTitle" >Comedies</span>
-            <ion-slides  scrollbar = "true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides3>
+            <ion-slides  scrollbar = "true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides3 (ionSlideReachEnd)="getComedies()">
 		          <ion-slide id = "comedies" *ngFor="let card of cardsComedy" (click)="movieInfo(card)">
 			          <ion-col>
 				          
@@ -122,8 +122,8 @@
     <ion-row>
       <div class="container">
           <span class = "genreTitle" >Action</span>
-          <ion-slides  scrollbar = "true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides4>
-            <ion-slide id = "actions" *ngFor="let card of cardsAction" (click)="movieInfo(card)">
+          <ion-slides  scrollbar = "true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides4 (ionSlideReachEnd)="getAction()">
+            <ion-slide id = "actions" *ngFor="let card of cardsAction" (click)="movieInfo(card)" >
               <ion-col>
                 
                 <ion-img class="movieImage" [src] = "card.getPoster()"></ion-img>
@@ -133,8 +133,8 @@
            </ion-slides>
       </div>
       <div class = "bHolder">
-        <div class ="buttons" (click)="slides3.slidePrev()" > < </div>
-          <div class ="buttons" (click)="slides3.slideNext()" > > </div>
+        <div class ="buttons" (click)="slides4.slidePrev()" > < </div>
+          <div class ="buttons" (click)="slides4.slideNext()" > > </div>
       </div>
   </ion-row>
     <ion-row>
