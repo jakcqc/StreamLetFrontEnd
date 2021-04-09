@@ -1,6 +1,6 @@
 #welcomeMessage span{
     display: block;
-    position: absolute;
+    
     font-size: 120px;
     font-weight: bold;
     font-family: 'Courgette', cursive;
@@ -9,16 +9,16 @@
     
 }
 #movies{
-    top: 15%;
-    left: 20%;
+    
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    width: 760px;
 }
 
-#places{
-    top: 35%;
-    left: 27%;
-}
 #background{
     height: 100%;
     width: 100%;
-    background-color: rgb(138, 10, 10) !important;
+    background-color: rgb(52, 84, 224) !important;
 }

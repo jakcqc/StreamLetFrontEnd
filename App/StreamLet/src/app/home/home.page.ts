@@ -97,6 +97,7 @@ export class HomePage {
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
     //set movie images of selected cards
+    //
     while(x<15){
       posters[x].attributes[1].value = this.totalMovieGenres.reccomended[x]; 
       x++
