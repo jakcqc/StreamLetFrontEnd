@@ -1,0 +1,15 @@
+<ion-content [fullscreen]="true" id = "bodyMain" >
+<img id = "logo" src = "assets/nameV3.png">
+<div class="loginCard">
+  <div >
+    Sign up to start getting reccomended movies based off your movie history and preferences! 
+  </div>
+  <div id="formCard">
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)">
+        <ion-textarea id = "textStuff" formControlName="content" placeholder = "write a comment :)"></ion-textarea>
+  
+    </form>
+  </div>
+  </div>
+  </ion-content>
+
