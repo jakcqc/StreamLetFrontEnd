@@ -23,6 +23,19 @@ const routes: Routes = [
   {
     path: 'search/:search', component: SearchComponent
   },
+  {
+    path: 'search', component: SearchComponent
+  },
+  {
+    path: 'find',
+    loadChildren: () => import('./views/find/find.module').then( m => m.FindPageModule)
+  },
+  {
+    path: 'find',
+    redirectTo: 'find',
+    pathMatch: 'full'
+  },
+
   
   
 ];

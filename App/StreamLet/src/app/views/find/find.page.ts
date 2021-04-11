@@ -4,13 +4,13 @@ import { Platform } from '@ionic/angular';
 import { Card } from '../../models/card.model';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
-    selector: 'app-search',
-    templateUrl: './search.component.html',
-    styleUrls: ['./search.component.scss'],
+  selector: 'app-find',
+  templateUrl: './find.page.html',
+  styleUrls: ['./find.page.scss'],
 })
-export class SearchComponent implements OnInit {
+export class FindPage implements OnInit {
+
     width;
     height;
     smallWidth = "auto";
@@ -103,3 +103,4 @@ getSearch(input){
   }
 
 }
+
