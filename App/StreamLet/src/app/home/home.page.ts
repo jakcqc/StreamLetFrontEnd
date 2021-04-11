@@ -108,17 +108,24 @@ export class HomePage {
     this.getAction();
 
 
-   
+  
   }
   routePage(name){
     this.router.navigate([name]);
   }
+
+  search(input){
+    console.log(input);
+    this.router.navigate(['search', input])
+
+  }
+
   movieInfo(movieInfo){
     document.getElementById("contentWrapper").style.display = "block";
     const movieImage = document.getElementById("movieImageCard");
     let cMain = document.getElementById("contentMain");
     
-   let currentWidth;
+  let currentWidth;
     
     if(this.width < 800){
       
@@ -246,6 +253,7 @@ export class HomePage {
         }
       }
     );
+    console.log(this.cardsAction);
     this.intAction++;
     if(this.intAction == 2)
       this.getAction();
