@@ -16,12 +16,15 @@ export class WelcomeComponent implements OnInit {
   bigHeight;
   smallHeight = .50;
   constructor(platform:Platform) {
+    
     platform.ready().then(() => {
+      const speal = document.querySelector<HTMLDivElement>('#movies');
+      const logo = document.querySelector<HTMLElement>('#logo');
         this.width = platform.width();
         this.height = platform.height();
-        const speal = document.querySelector<HTMLDivElement>('#movies');
-        if(this.width < 900){
         
+        if(this.width < 900){
+          logo.style.width = "150px";
           speal.style.width = this.smallWidth;
           speal.style.height = this.height*this.smallHeight + "px";
           speal.style.fontSize = this.smallFontSize;
@@ -34,18 +37,21 @@ export class WelcomeComponent implements OnInit {
         }
     }); 
     platform.resize.subscribe(async () => {
+      const speal = document.querySelector<HTMLDivElement>('#movies');
+      const logo = document.querySelector<HTMLElement>('#logo');
       this.width = platform.width();
         this.height = platform.height();
-        const speal = document.querySelector<HTMLDivElement>('#movies');
+        
 
         if(this.width < 900){
         
-          
+          logo.style.width = "150px";
           speal.style.fontSize = this.smallFontSize;
           speal.style.width = this.smallWidth;
           speal.style.height = this.height*this.smallHeight + "px";
 
         }else{
+          logo.style.width = "15%";
           speal.style.fontSize = this.bigFontSize;
           speal.style.width = this.bigWidth;
         }
