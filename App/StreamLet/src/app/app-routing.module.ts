@@ -27,7 +27,7 @@ const routes: Routes = [
     path: 'search', component: SearchComponent
   },
   {
-    path: 'find',
+    path: 'find/:search',
     loadChildren: () => import('./views/find/find.module').then( m => m.FindPageModule)
   },
   {

@@ -66,41 +66,104 @@ ngOnInit() {
 }
 intSearch = 0;
 cardsSearch = [];
-// getSearch(input){
-//     this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
-//         data => {
-//             console.log(data);
-//             let parsedData = JSON.parse(JSON.stringify(data));
-//             console.log(parsedData.length);
-
-//         for(let i = 0; i < parsedData.length; i++){
-//             let obj = parsedData[i];
-//             let card = new Card(obj);
-//             console.log(card);
-//             this.cardsSearch.push(card);
-//         }
-//         console.log(this.cardsSearch);
-
-//     }
-//     );
-//     console.log("here");
-//     console.log(this.cardsSearch);
-//     this.intSearch++;
-// }
 
 getSearch(input){
-    this.http.get('http://localhost:9091/broadQuery?genre=35&page=1').toPromise().then(
-      data => {
-        let parsedData = JSON.parse(JSON.stringify(data));
+    this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
+        data => {
+            console.log(data);
+            let parsedData = JSON.parse(JSON.stringify(data));
+            console.log(parsedData.length);
+
         for(let i = 0; i < parsedData.length; i++){
-          let obj = parsedData[i];
-          let card = new Card(obj);
-          this.cardsSearch.push(card);
+            let obj = parsedData[i];
+            let card = new Card(obj);
+            console.log(card);
+            this.cardsSearch.push(card);
         }
-        this.isDataAvailable = true;
+        console.log(this.cardsSearch);
+
     }
     );
-  }
-
+    console.log("here");
+    console.log(this.cardsSearch);
+    this.intSearch++;
 }
 
+updateSearch(input){
+  this.cardsSearch = [];
+  this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
+      data => {
+          console.log(data);
+          let parsedData = JSON.parse(JSON.stringify(data));
+          console.log(parsedData.length);
+
+      for(let i = 0; i < parsedData.length; i++){
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          console.log(card);
+          this.cardsSearch.push(card);
+      }
+      console.log(this.cardsSearch);
+
+  }
+  );
+  console.log("here");
+  console.log(this.cardsSearch);
+  this.intSearch++;
+}
+movieInfo(movieInfo){
+  document.getElementById("contentWrapper").style.display = "block";
+  const movieImage = document.getElementById("movieImageCard");
+  let cMain = document.getElementById("contentMain");
+  
+let currentWidth;
+  
+  if(this.width < 800){
+    
+    cMain.style.width = "100%";
+    currentWidth = 1;
+    cMain.style.left = "0%";
+    movieImage.style.backgroundPosition = "none";
+  }
+  else{
+    cMain.style.width = "40%";
+    currentWidth = .40;
+
+    cMain.style.left = "30%";
+    movieImage.style.backgroundPosition = "center";
+  }
+  cMain.style.right = "none";
+  const tempHeight = this.height/1.1;    
+  cMain.style.height = tempHeight.toString() + "px";
+  
+  
+  this.populateCard(movieImage,currentWidth, movieInfo);
+  
+}
+populateCard(movieImage,currentWidth, movieInfo){
+  const displayer = document.getElementById("cardMain");
+  displayer.style.display = "block";
+  
+  
+  document.getElementById("imageOnCard").setAttribute( 'src',movieInfo.getPoster());
+  document.getElementById("cardTitle").innerHTML = movieInfo.getTitle();
+  document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
+  document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
+  document.getElementById("cardCast").innerHTML = movieInfo.getCast();
+
+  const widther = this.height*.85;
+  movieImage.style.height = widther.toString() + "px";
+  const result = async function getImageColor (){
+    await analyze(movieInfo.getPoster());
+  }
+  console.log(result[0]);
+  
+  //console.log(result[0].color);
+  
+  document.getElementById("cardMain").style.backgroundColor = "black";
+  
+  
+}
+
+
+}

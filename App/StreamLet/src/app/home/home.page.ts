@@ -115,8 +115,7 @@ export class HomePage {
   }
 
   search(input){
-    console.log(input);
-    this.router.navigate(['search', input])
+    this.router.navigate(['find', input])
 
   }
 
@@ -159,6 +158,10 @@ export class HomePage {
     document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
     document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
     document.getElementById("cardCast").innerHTML = movieInfo.getCast();
+    document.getElementById("netflixLink").href = movieInfo.getNetflix();
+    document.getElementById("huluLink").href = movieInfo.getHulu();
+    document.getElementById("primeLink").href = movieInfo.getPrime();
+
 
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
@@ -232,7 +235,8 @@ export class HomePage {
         for(let i = 0; i < parsedData.length; i++){
           let obj = parsedData[i];
           let card = new Card(obj);
-          this.cardsComedy.push(card);
+          if(card.getPoster() != null)
+            this.cardsComedy.push(card);
         }
       }
     );
@@ -249,7 +253,8 @@ export class HomePage {
         for(let i = 0; i < parsedData.length; i++){
           let obj = parsedData[i];
           let card = new Card(obj);
-          this.cardsAction.push(card);
+          if(card.getPoster() != null)
+            this.cardsAction.push(card);
         }
       }
     );

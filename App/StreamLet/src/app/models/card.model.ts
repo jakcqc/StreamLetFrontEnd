@@ -8,6 +8,9 @@ export class Card {
     overview: string;
     posterURL: string[];
     imdbRating: number;
+    netflixLink?: any;
+    huluLink?: any;
+    primeLink?: any;
 
     constructor(userResponse: any){
         this.title = userResponse.title;
@@ -19,6 +22,9 @@ export class Card {
         this.overview = userResponse.overview;
         this.posterURL = userResponse.posterURLs;
         this.imdbRating = userResponse.imdbRating;
+        this.netflixLink = userResponse.streamingInfo?.netflix?.us?.link;
+        this.huluLink = userResponse.streamingInfo?.hulu?.us?.link;
+        this.primeLink = userResponse.streamingInfo?.prime?.us?.link;
     }
 
     getTitle() {
@@ -143,5 +149,17 @@ export class Card {
 
     getImdbRating(){
         return this.imdbRating;
+    }
+    
+    getNetflix() {
+        return this.netflixLink;
+    }
+
+    getHulu() {
+        return this.huluLink;
+    }
+
+    getPrime() {
+        return this.primeLink;
     }
 }
