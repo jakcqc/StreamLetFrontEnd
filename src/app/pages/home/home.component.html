@@ -1,0 +1,18 @@
+<div class="container" *ngIf="auth.isLoading$ | async; else loaded">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #loaded>
+  <div id="scrollMain">
+      <ion-grid>
+        <app-content-info></app-content-info>
+        <div id="contentWrapper" (click)="resetNorm()"></div>
+        <app-content-slides title="Comedy"></app-content-slides>
+        <app-content-slides title="Action"></app-content-slides>
+        <app-content-slides title="Drama"></app-content-slides>
+        <app-content-slides title="Romance"></app-content-slides>
+      </ion-grid>
+  </div>
+</ng-template>
+
+

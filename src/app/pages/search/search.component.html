@@ -1,0 +1,19 @@
+<ion-row>
+    <div class="container">
+        <span class="genreTitle">Search Results</span>
+        <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides1>
+            <ion-slide id="comedies" *ngFor="let card of cardsSearch">
+                <ion-col>
+
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                </ion-col>
+            </ion-slide>
+        </ion-slides>
+    </div>
+    <div class="bHolder">
+        <div class="buttons" (click)="slides1.slidePrev()">
+        </div>
+        <div class="buttons" (click)="slides1.slideNext()"> > </div>
+    </div>
+</ion-row>

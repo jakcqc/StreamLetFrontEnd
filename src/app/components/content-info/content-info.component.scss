@@ -1,0 +1,234 @@
+.container {
+    width: 100%;
+    text-align: left;
+  }
+  ion-grid{
+    margin-left: 2%;
+    margin-top: 2%;
+  }
+  ion-row{
+    margin-bottom: 30px;
+  }
+  .buttons{
+    display: inline-block;
+    border-radius: 1px;
+    height: auto;
+    width: auto;
+    margin-right: 20px;
+    background-color: none;
+    color: rgb(238, 238, 238);
+    transition: .2s;
+    padding: 10px;
+    box-shadow: 1px 1px 2px black;
+    border: 2px solid rgb(243, 243, 243);
+    user-select: none;
+  }
+  div.buttons{
+    border-radius: 6px;
+    font-size:x-large;
+    transition: .4s;
+    box-shadow: 3px 3px  rgb(247, 247, 247);
+  
+  }
+  div.buttons:hover{
+    border-radius: 6px;
+    box-shadow: 2px 1px;
+  }
+  .buttons:hover{
+    border-radius: 0px;
+    box-shadow: 3px 3px  rgb(247, 247, 247);
+    color: white;
+    //background-color: rgb(250, 250, 250);
+    
+  }
+  #contentWrapper{
+    position: fixed;
+    display: none;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    background-color: rgb(15, 15, 15);
+    opacity: .65;
+    z-index: 5;
+  }
+  #contentMain{
+    display: block;
+    position:fixed;
+    top: 10%;
+    //left: 30%;
+    height: 0%;
+    width: auto;
+    background-color: black;
+    opacity: 1;
+    z-index: 10;
+    border-radius: 10px;
+    transition: .4s;
+    overflow: scroll;
+    
+  }
+  
+  #cardMain{
+    display: none;
+    
+    border: 3px solid black;
+    border-radius: 4px;
+  }
+  .movieImage{
+    border:1px solid black;
+    transition: .2s;
+  }
+  .movieImage:hover{
+    border-color: white;
+  }
+  #movieImageCard{
+    //border: 3px solid black;
+    //padding: 15px;
+    position: relative;
+    width: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    //background-size: contain;
+  }
+  #movieImageCard .buttons{
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    background-color: black;
+    opacity: .6;
+    z-index: 4;
+    padding: 5px;
+  
+  
+  }
+  #movieImageCard img{
+    display: block;
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    object-fit: contain;
+    
+  }
+  
+  #iconHolder{
+    width: 100%;
+    padding-top: 5px;
+    background-color: rgb(14, 14, 14);
+    
+  }
+  #iconHolder img{
+    display: inline-block;
+    height: 80px;
+    width: 33.33%;
+    object-fit: cover;
+    transition: .5s;
+    border: 3px solid rgb(17, 17, 17);
+  }
+  #iconHolder img:hover{
+    //margin-left: 5px;
+    //margin-right: 5px;
+    //object-fit: contain;
+    //width: 33%;
+    border-color:  rgb(236, 236, 236);
+  }
+  
+  ion-slide{
+    
+    height: auto;
+    width: auto;
+    max-width: 150px;
+  
+    transition: height .5s;
+    text-align: center;
+    margin-top: 10px;
+    
+    padding: 1px;
+  }
+  ion-label{
+    display: inline-block;
+    width: 100px;
+  }
+  
+  // #comedies{
+  //   height: 550px;
+  //   width: 320px;
+  // }
+  
+  .container span {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: underline;
+     text-decoration-thickness: 5px;
+    
+    line-height: 26pt;
+    //line-height: 26px;
+  }
+  #logo{
+    height: 60px;
+  }
+  #titleBackground{
+    display: inline-block;
+    //background-color: rgb(251, 243, 253);
+  }
+  #watchBar{
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    background-color: rgb(10, 10, 10);
+    //opacity: .7;
+    border-top: 5px solid rgb(247, 229, 71);
+    user-select: none;
+  }
+  #watchBar h2{
+    display: inline-block;
+    width: 100%;
+    height: auto;
+    background-color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    text-shadow: 1px 1px 1px rgb(243, 243, 243);
+    border-top: 5px solid black;
+    font-family: "Open Sans";
+  }
+  #watchBar p{
+    font-family: "Open Sans";
+    font-weight: 400;
+  }
+  #watchBar h3{
+    font-family: "Open Sans";
+    font-weight: 800;
+  }
+  .writerStarDirector{
+    font-size: 15px;
+    font-weight: 400;
+  }
+  #stickyDiv{
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+  
+  ion-slides{
+    
+    margin-bottom: 10px;
+  --bullet-background: red	;
+  --bullet-background-active: green;	
+  --progress-bar-background: yellow;
+  --progress-bar-background-active: blue;
+  --scroll-bar-background: rgb(53, 53, 53);
+  --scroll-bar-background-active: rgb(238, 238, 238);
+  }
+  .genreTitle{
+    margin-right: 20px;
+  }
+  .bHolder{
+    display: inline-block;
+    margin: auto auto;
+  }
+  
+  
