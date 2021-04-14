@@ -32,7 +32,7 @@ cardsSearch = [];
 
 getSearch(input){
   console.log(input);
-  this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
+  this.http.get('http://18.188.243.225:9091/searchQuery?title='+input).toPromise().then(
       data => {
           console.log(data);
           let parsedData = JSON.parse(JSON.stringify(data));
@@ -55,7 +55,7 @@ getSearch(input){
 
 updateSearch(input){
 this.cardsSearch = [];
-this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
+this.http.get('http://18.188.243.225:9091/searchQuery?title='+input).toPromise().then(
     data => {
         console.log(data);
         let parsedData = JSON.parse(JSON.stringify(data));

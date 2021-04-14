@@ -87,7 +87,7 @@ export class HomeComponent {
   }
 
   getComedies(){
-    this.http.get('http://localhost:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){

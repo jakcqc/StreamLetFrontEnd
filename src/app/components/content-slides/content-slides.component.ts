@@ -46,7 +46,7 @@ export class ContentSlidesComponent implements OnInit {
   }
 
   getComedies(){
-    this.http.get('http://localhost:9091/broadQuery?genre=35&page='+this.homeComponent.intComedy).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.homeComponent.intComedy).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
@@ -65,7 +65,7 @@ export class ContentSlidesComponent implements OnInit {
   }
 
   getAction(){
-    this.http.get('http://localhost:9091/broadQuery?genre=28&page='+this.homeComponent.intAction).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=28&page='+this.homeComponent.intAction).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
@@ -84,7 +84,7 @@ export class ContentSlidesComponent implements OnInit {
   }
 
   getDrama(){
-    this.http.get('http://localhost:9091/broadQuery?genre=18&page='+this.homeComponent.intDrama).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=18&page='+this.homeComponent.intDrama).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
@@ -103,7 +103,7 @@ export class ContentSlidesComponent implements OnInit {
   }
 
   getRomance(){
-    this.http.get('http://localhost:9091/broadQuery?genre=18&page='+this.homeComponent.intRomance).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=18&page='+this.homeComponent.intRomance).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
