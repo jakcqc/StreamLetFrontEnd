@@ -7,6 +7,7 @@ import { MovieServiceService } from '../services/movie-service.service';
 import { IonSlides} from '@ionic/angular';
 
 import analyze from 'rgbaster';
+import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import analyze from 'rgbaster';
 })
 export class HomePage {
   @ViewChild(IonSlides) slides: IonSlides;
-  
+  @ViewChild('slides1') slider: IonSlides;
   
   
   
@@ -36,7 +37,7 @@ export class HomePage {
   animated : [],
   thriller : []
   };
-  
+  movieUpdater = 5;
   //color array for underline categories 
   colors = [
     "darkred",
@@ -55,21 +56,39 @@ export class HomePage {
     "cyan",
     "darkcyan"
   ];
-  
+  movieData = "Jack Nicholson, Shelley Duvall, Danny Lloyd";
   width;
   height;
   constructor(navCtrl: NavController, private router: Router, 
     platform: Platform, public movies: MovieServiceService,
     ) {
-    platform.ready().then(() => {
-      this.width = platform.width();
+      platform.ready().then(() => {
+        this.width = platform.width();
+        this.height = platform.height();
+        const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+        if(this.width < 800){
+        const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
+        
+        buttonHolder.forEach(element => {
+          element.style.display = "none";
+        });
+        slides.forEach(element => {
+          element.style.width = "100px";
+          element.style.height = "auto";
+        });
+        }else{
+          slides.forEach(element => {
+            element.style.width = "160px";
+            element.style.height = "auto";
+          });
+        }
       
-      this.height = platform.height();
-      const slides = document.querySelectorAll<HTMLElement>('.movieImage');
-      
-      
-      
-      
+      });
+      platform.resize.subscribe(async () => {
+        
+        this.width = platform.width();
+        this.height = platform.height();
+        const slides = document.querySelectorAll<HTMLElement>('.movieImage');
       if(this.width < 800){
       const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
       
@@ -86,20 +105,29 @@ export class HomePage {
           element.style.height = "auto";
         });
       }
-    });
+      });
+    
     
   }
+  
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
     let x = 0;
     
-    
+    let totalCards = document.querySelectorAll<HTMLElement>("ion-slide");
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
     //set movie images of selected cards
     //
+    
+    //console.log(totalCards);
+    totalCards.forEach(element => {
+      //console.log(element);
+      
+    });
     while(x<15){
       posters[x].attributes[1].value = this.totalMovieGenres.reccomended[x]; 
+
       x++
     }
 
@@ -107,6 +135,25 @@ export class HomePage {
   }
   routePage(name){
     this.router.navigate([name]);
+  }
+
+  sliderPopulate(cNum){
+    //console.log("yeet");
+    console.log(this.movieUpdater);
+    
+    
+    console.log(cNum);
+    
+    if(this.movieUpdater%cNum == 0){
+      console.log("farter");
+      
+    }
+    this.cards.push(this.cards.length);
+    //console.log(this.slides);
+    
+    // this.slides.update().then(() =>
+    //         console.log(this.cards.length));
+        
   }
   movieInfo(movieInfo){
     
@@ -134,6 +181,7 @@ export class HomePage {
     const tempHeight = this.height/1.1;    
     cMain.style.height = tempHeight.toString() + "px";
     
+    console.log(movieInfo);
     
     this.populateCard(movieImage,currentWidth);
     
@@ -141,6 +189,8 @@ export class HomePage {
   populateCard(movieImage,currentWidth){
     const displayer = document.getElementById("cardMain");
     displayer.style.display = "block";
+    console.log(displayer);
+    
     
     //movieImage.style.backgroundImage = "url('/assets/theShining.jpg')";
     
@@ -168,7 +218,6 @@ export class HomePage {
     }
     if(animation == 1){
       document.getElementById("contentMain").style.height = "0%";
-
     }
     if(animation == 2){
       document.getElementById("contentMain").style.width = "0%";
@@ -193,6 +242,7 @@ export class HomePage {
     //call the api to get the right data for the reroute 
     
     route = this.movies.getMovieroute(route);
+    window.open("https://www.netflix.com/search?q=er&jbv=80127001");
     console.log(route);
     
 
