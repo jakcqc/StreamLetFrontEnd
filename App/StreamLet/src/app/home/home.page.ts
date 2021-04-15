@@ -124,28 +124,10 @@ export class HomePage {
     let totalCards = document.querySelectorAll<HTMLElement>("ion-slide");
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
-<<<<<<< HEAD
-    //set movie images of selected cards
-    //
-    
-    //console.log(totalCards);
-    totalCards.forEach(element => {
-      //console.log(element);
-      
-    });
-    while(x<15){
-      posters[x].attributes[1].value = this.totalMovieGenres.reccomended[x]; 
-
-      x++
-    }
-=======
 
     this.getComedies();
     this.getAction();
 
->>>>>>> eef01e78d59986905fe2913e9c6e6ebe3ec2ecdd
-
-   
   }
   routePage(name){
     this.router.navigate([name]);
