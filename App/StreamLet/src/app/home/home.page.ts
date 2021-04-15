@@ -8,7 +8,6 @@ import { IonSlides} from '@ionic/angular';
 import { Card } from '../models/card.model';
 import { HttpClient } from '@angular/common/http';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,7 +15,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomePage {
   @ViewChild(IonSlides) slides: IonSlides;
-  
+  @ViewChild('slides1') slider: IonSlides;
   
   
   
@@ -42,7 +41,7 @@ export class HomePage {
   animated : [],
   thriller : []
   };
-  
+  movieUpdater = 5;
   //color array for underline categories 
   colors = [
     "darkred",
@@ -61,21 +60,39 @@ export class HomePage {
     "cyan",
     "darkcyan"
   ];
-  
+  movieData = "Jack Nicholson, Shelley Duvall, Danny Lloyd";
   width;
   height;
   constructor(navCtrl: NavController, private router: Router, 
     platform: Platform, public movies: MovieServiceService, private http: HttpClient
     ) {
-    platform.ready().then(() => {
-      this.width = platform.width();
+      platform.ready().then(() => {
+        this.width = platform.width();
+        this.height = platform.height();
+        const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+        if(this.width < 800){
+        const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
+        
+        buttonHolder.forEach(element => {
+          element.style.display = "none";
+        });
+        slides.forEach(element => {
+          element.style.width = "100px";
+          element.style.height = "auto";
+        });
+        }else{
+          slides.forEach(element => {
+            element.style.width = "160px";
+            element.style.height = "auto";
+          });
+        }
       
-      this.height = platform.height();
-      const slides = document.querySelectorAll<HTMLElement>('.movieImage');
-      
-      
-      
-      
+      });
+      platform.resize.subscribe(async () => {
+        
+        this.width = platform.width();
+        this.height = platform.height();
+        const slides = document.querySelectorAll<HTMLElement>('.movieImage');
       if(this.width < 800){
       const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
       
@@ -92,21 +109,22 @@ export class HomePage {
           element.style.height = "auto";
         });
       }
-    });
+      });
+    
     
   }
+  
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
     let x = 0;
     
-    
+    let totalCards = document.querySelectorAll<HTMLElement>("ion-slide");
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
 
+
     this.getComedies();
     this.getAction();
-
-
   
   }
   routePage(name){
@@ -117,7 +135,6 @@ export class HomePage {
     this.router.navigate(['find', input])
 
   }
-
   movieInfo(movieInfo){
     document.getElementById("contentWrapper").style.display = "block";
     const movieImage = document.getElementById("movieImageCard");
@@ -143,6 +160,7 @@ export class HomePage {
     const tempHeight = this.height/1.1;    
     cMain.style.height = tempHeight.toString() + "px";
     
+    console.log(movieInfo);
     
     this.populateCard(movieImage,currentWidth, movieInfo);
     
@@ -150,6 +168,8 @@ export class HomePage {
   populateCard(movieImage,currentWidth, movieInfo){
     const displayer = document.getElementById("cardMain");
     displayer.style.display = "block";
+    console.log(displayer);
+    
     
     
     document.getElementById("imageOnCard").setAttribute( 'src',movieInfo.getPoster());
@@ -182,7 +202,6 @@ export class HomePage {
     }
     if(animation == 1){
       document.getElementById("contentMain").style.height = "0%";
-
     }
     if(animation == 2){
       document.getElementById("contentMain").style.width = "0%";
