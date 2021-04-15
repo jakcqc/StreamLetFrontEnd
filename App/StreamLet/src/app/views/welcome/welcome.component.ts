@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
+
 import { Router,NavigationEnd} from '@angular/router';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -15,6 +17,7 @@ export class WelcomeComponent implements OnInit {
   bigFontSize = "120px";
   bigHeight;
   smallHeight = .50;
+  
   constructor(platform:Platform,private router: Router) {
     
     platform.ready().then(() => {
@@ -52,6 +55,7 @@ export class WelcomeComponent implements OnInit {
         if(this.width<700){
           info.forEach(element => {
              element.style.height = "auto";
+
 
           });
         }
