@@ -8,9 +8,6 @@ import { IonSlides} from '@ionic/angular';
 import { Card } from '../models/card.model';
 import { HttpClient } from '@angular/common/http';
 
-import analyze from 'rgbaster';
-import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -124,57 +121,26 @@ export class HomePage {
     let totalCards = document.querySelectorAll<HTMLElement>("ion-slide");
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
-<<<<<<< HEAD
-    //set movie images of selected cards
-    //
-    
-    //console.log(totalCards);
-    totalCards.forEach(element => {
-      //console.log(element);
-      
-    });
-    while(x<15){
-      posters[x].attributes[1].value = this.totalMovieGenres.reccomended[x]; 
 
-      x++
-    }
-=======
 
     this.getComedies();
     this.getAction();
-
->>>>>>> eef01e78d59986905fe2913e9c6e6ebe3ec2ecdd
-
-   
+  
   }
   routePage(name){
     this.router.navigate([name]);
   }
 
-  sliderPopulate(cNum){
-    //console.log("yeet");
-    console.log(this.movieUpdater);
-    
-    
-    console.log(cNum);
-    
-    if(this.movieUpdater%cNum == 0){
-      console.log("farter");
-      
-    }
-    this.cards.push(this.cards.length);
-    //console.log(this.slides);
-    
-    // this.slides.update().then(() =>
-    //         console.log(this.cards.length));
-        
+  search(input){
+    this.router.navigate(['find', input])
+
   }
   movieInfo(movieInfo){
     document.getElementById("contentWrapper").style.display = "block";
     const movieImage = document.getElementById("movieImageCard");
     let cMain = document.getElementById("contentMain");
     
-   let currentWidth;
+  let currentWidth;
     
     if(this.width < 800){
       
@@ -211,15 +177,17 @@ export class HomePage {
     document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
     document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
     document.getElementById("cardCast").innerHTML = movieInfo.getCast();
+    const netflixE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    const huluE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    const PrimeE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    netflixE.href = movieInfo.getNetflix();
+    huluE.href = movieInfo.getHulu();
+    PrimeE.href = movieInfo.getPrime();
+
 
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
-    const result = async function getImageColor (){
-      await analyze(movieInfo.getPoster());
-    }
-    console.log(result[0]);
     
-    //console.log(result[0].color);
     
     document.getElementById("cardMain").style.backgroundColor = "black";
     
@@ -253,16 +221,6 @@ export class HomePage {
   getMovieGenre(){
 
   }
-  streamingServiceRoute(route){
-    //reroute the user to the proper video route 
-    //call the api to get the right data for the reroute 
-    
-    route = this.movies.getMovieroute(route);
-    window.open("https://www.netflix.com/search?q=er&jbv=80127001");
-    console.log(route);
-    
-
-  }
   setGenreColor(){
     const test = document.querySelectorAll<HTMLElement>('.genreTitle');
     
@@ -278,13 +236,14 @@ export class HomePage {
   }
 
   getComedies(){
-    this.http.get('http://localhost:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
           let obj = parsedData[i];
           let card = new Card(obj);
-          this.cardsComedy.push(card);
+          if(card.getPoster() != null)
+            this.cardsComedy.push(card);
         }
       }
     );
@@ -294,17 +253,19 @@ export class HomePage {
   }
 
   getAction(){
-    this.http.get('http://localhost:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
 
         for(let i = 0; i < parsedData.length; i++){
           let obj = parsedData[i];
           let card = new Card(obj);
-          this.cardsAction.push(card);
+          if(card.getPoster() != null)
+            this.cardsAction.push(card);
         }
       }
     );
+    console.log(this.cardsAction);
     this.intAction++;
     if(this.intAction == 2)
       this.getAction();

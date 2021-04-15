@@ -2,6 +2,7 @@
 Front end for StreamLet
 
 # Frontend Tasks: 
+
 1. Connect backend --> basically done 
 2. Finish login page --> ui needed
 3. Finalize dynamic data population --> finished 
@@ -12,3 +13,4 @@ Front end for StreamLet
 1. reccomended --> algorithm needed
 2. finish api endpoints --> done
 3. database connection --> still neded
+
