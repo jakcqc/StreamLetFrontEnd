@@ -5,6 +5,8 @@ import { identifierModuleUrl } from '@angular/compiler';
 import { Platform } from '@ionic/angular';
 import { MovieServiceService } from '../services/movie-service.service';
 import { IonSlides} from '@ionic/angular';
+import { Card } from '../models/card.model';
+import { HttpClient } from '@angular/common/http';
 
 import analyze from 'rgbaster';
 import { convertUpdateArguments } from '@angular/compiler/src/compiler_util/expression_converter';
@@ -23,6 +25,11 @@ export class HomePage {
   cards = [
     "Example","After",2,3,4,5,6,7,8,9,10,11,12,13,14,15
   ]
+  cardsNew = [];
+  cardsAction = [];
+  cardsComedy = [];
+  intComedy = 1;
+  intAction = 1;
 
   //total movie types to presented on the main page
   //first load fills these with the movie images
@@ -60,7 +67,7 @@ export class HomePage {
   width;
   height;
   constructor(navCtrl: NavController, private router: Router, 
-    platform: Platform, public movies: MovieServiceService,
+    platform: Platform, public movies: MovieServiceService, private http: HttpClient
     ) {
       platform.ready().then(() => {
         this.width = platform.width();
@@ -117,6 +124,7 @@ export class HomePage {
     let totalCards = document.querySelectorAll<HTMLElement>("ion-slide");
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
+<<<<<<< HEAD
     //set movie images of selected cards
     //
     
@@ -130,6 +138,12 @@ export class HomePage {
 
       x++
     }
+=======
+
+    this.getComedies();
+    this.getAction();
+
+>>>>>>> eef01e78d59986905fe2913e9c6e6ebe3ec2ecdd
 
    
   }
@@ -156,7 +170,6 @@ export class HomePage {
         
   }
   movieInfo(movieInfo){
-    
     document.getElementById("contentWrapper").style.display = "block";
     const movieImage = document.getElementById("movieImageCard");
     let cMain = document.getElementById("contentMain");
@@ -183,23 +196,26 @@ export class HomePage {
     
     console.log(movieInfo);
     
-    this.populateCard(movieImage,currentWidth);
+    this.populateCard(movieImage,currentWidth, movieInfo);
     
   }
-  populateCard(movieImage,currentWidth){
+  populateCard(movieImage,currentWidth, movieInfo){
     const displayer = document.getElementById("cardMain");
     displayer.style.display = "block";
     console.log(displayer);
     
     
-    //movieImage.style.backgroundImage = "url('/assets/theShining.jpg')";
     
-    let cImage = document.getElementById("imageOnCard");
-    cImage.setAttribute( 'src','assets/theShining.jpg');
+    document.getElementById("imageOnCard").setAttribute( 'src',movieInfo.getPoster());
+    document.getElementById("cardTitle").innerHTML = movieInfo.getTitle();
+    document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
+    document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
+    document.getElementById("cardCast").innerHTML = movieInfo.getCast();
+
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
     const result = async function getImageColor (){
-      await analyze('assets/theShining.jpg');
+      await analyze(movieInfo.getPoster());
     }
     console.log(result[0]);
     
@@ -261,4 +277,36 @@ export class HomePage {
   
   }
 
+  getComedies(){
+    this.http.get('http://localhost:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
+      data => {
+        let parsedData = JSON.parse(JSON.stringify(data));
+        for(let i = 0; i < parsedData.length; i++){
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          this.cardsComedy.push(card);
+        }
+      }
+    );
+    this.intComedy++;
+    if(this.intComedy == 2)
+      this.getComedies();
+  }
+
+  getAction(){
+    this.http.get('http://localhost:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
+      data => {
+        let parsedData = JSON.parse(JSON.stringify(data));
+
+        for(let i = 0; i < parsedData.length; i++){
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          this.cardsAction.push(card);
+        }
+      }
+    );
+    this.intAction++;
+    if(this.intAction == 2)
+      this.getAction();
+  }
 }
