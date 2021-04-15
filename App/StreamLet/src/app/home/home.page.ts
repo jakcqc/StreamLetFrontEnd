@@ -8,7 +8,6 @@ import { IonSlides} from '@ionic/angular';
 import { Card } from '../models/card.model';
 import { HttpClient } from '@angular/common/http';
 
-import analyze from 'rgbaster';
 
 @Component({
   selector: 'app-home',
@@ -158,19 +157,17 @@ export class HomePage {
     document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
     document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
     document.getElementById("cardCast").innerHTML = movieInfo.getCast();
-    document.getElementById("netflixLink").href = movieInfo.getNetflix();
-    document.getElementById("huluLink").href = movieInfo.getHulu();
-    document.getElementById("primeLink").href = movieInfo.getPrime();
+    const netflixE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    const huluE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    const PrimeE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    netflixE.href = movieInfo.getNetflix();
+    huluE.href = movieInfo.getHulu();
+    PrimeE.href = movieInfo.getPrime();
 
 
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
-    const result = async function getImageColor (){
-      await analyze(movieInfo.getPoster());
-    }
-    console.log(result[0]);
     
-    //console.log(result[0].color);
     
     document.getElementById("cardMain").style.backgroundColor = "black";
     
@@ -205,15 +202,6 @@ export class HomePage {
   getMovieGenre(){
 
   }
-  streamingServiceRoute(route){
-    //reroute the user to the proper video route 
-    //call the api to get the right data for the reroute 
-    
-    route = this.movies.getMovieroute(route);
-    console.log(route);
-    
-
-  }
   setGenreColor(){
     const test = document.querySelectorAll<HTMLElement>('.genreTitle');
     
@@ -229,7 +217,7 @@ export class HomePage {
   }
 
   getComedies(){
-    this.http.get('http://localhost:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
@@ -246,7 +234,7 @@ export class HomePage {
   }
 
   getAction(){
-    this.http.get('http://localhost:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
 

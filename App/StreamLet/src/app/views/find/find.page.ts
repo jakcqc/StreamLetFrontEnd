@@ -68,7 +68,7 @@ intSearch = 0;
 cardsSearch = [];
 
 getSearch(input){
-    this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
+    this.http.get('http://18.188.243.225:9091/searchQuery?title='+input).toPromise().then(
         data => {
             console.log(data);
             let parsedData = JSON.parse(JSON.stringify(data));
@@ -91,7 +91,7 @@ getSearch(input){
 
 updateSearch(input){
   this.cardsSearch = [];
-  this.http.get('http://localhost:9091/searchQuery?title='+input).toPromise().then(
+  this.http.get('http://18.188.243.225:9091/searchQuery?title='+input).toPromise().then(
       data => {
           console.log(data);
           let parsedData = JSON.parse(JSON.stringify(data));
@@ -153,12 +153,7 @@ populateCard(movieImage,currentWidth, movieInfo){
 
   const widther = this.height*.85;
   movieImage.style.height = widther.toString() + "px";
-  const result = async function getImageColor (){
-    await analyze(movieInfo.getPoster());
-  }
-  console.log(result[0]);
   
-  //console.log(result[0].color);
   
   document.getElementById("cardMain").style.backgroundColor = "black";
   
