@@ -1,19 +1,61 @@
 <ion-content [fullscreen]="true" >
 <div id = "background">
+<div class="lamp">
+    <div class="lava">
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob top"></div>
+      <div class="blob bottom"></div>
+      
+    </div>
+</div>
+<svg id = "back" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+      <feBlend in="SourceGraphic" in2="goo" />
+    </filter>
+  </defs>
+</svg>
+<img id = "logo" src = "assets/nameLogoV2.png">
 <div id = "welcomeMessage">
-  <div id = "movies"> Dive into your entertainment </div>
-  <div id = "colorMotion"></div>
+
+
+  <div id = "movies"> Dive into your entertainment <div class = "explorer" id = "colorMotion" (click)="route('home')">Explore Now</div></div>
+  
 </div>
 </div>
-<div class = "aboutUs">
-  <div>
-      What we are:
+<div id = "aboutUs">
+  <div class = "bContainer">
+     <div> Find all your movies and shows in one place</div>
+      <div class = "button">Netflix</div>
+      <div class = "button">hulu</div>
+      <div class = "button">Prime</div>
   </div>
-  <div>
-      What we used:
+  <div class = "bContainer">
+  StreamLet allows for easy navigation between each of your streaming services.
+      <div id = "front">While giving ratings and information on each movie and show.</div>
+      <div id = "backAbout"></div>
   </div>
+  <div class = "bContainer">
+     <div> Create an account to have reccomended movies based off of all your watch history.</div>
+     <div class = "explorer" id = "createAccount" (click)="route('user-login')">Create Account</div>
+      
+  </div>
+  <div class = "bContainer">
+    <div id = "save">Less time searching, more time watching.  </div>
+    <img id = "logo2" src = "assets/nameLogoV2.png">
+    </div>
 </div>
 
 </ion-content>
-<!-- <span id = "movies"> More movies </span>
-<span id = "places"> less places </span> -->
