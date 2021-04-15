@@ -27,22 +27,35 @@
     </filter>
   </defs>
 </svg>
-
-<div id = "welcomeMessage">
 <img id = "logo" src = "assets/nameLogoV2.png">
-  <div id = "movies"> Dive into your entertainment </div>
-  <div id = "colorMotion"></div>
+<div id = "welcomeMessage">
+
+  <div id = "movies"> Dive into your entertainment <div class = "explorer" id = "colorMotion" (click)="route('home')">Explore Now</div></div>
+  
 </div>
 </div>
-<div class = "aboutUs">
-  <div>
+<div id = "aboutUs">
+  <div class = "bContainer">
+     <div> Find all your movies and shows in one place</div>
+      <div class = "button">Netflix</div>
+      <div class = "button">hulu</div>
+      <div class = "button">Prime</div>
+  </div>
+  <div class = "bContainer">
+  StreamLet allows for easy navigation between each of your streaming services.
+      <div id = "front">While giving ratings and information on each movie and show.</div>
+      <div id = "backAbout"></div>
+  </div>
+  <div class = "bContainer">
+     <div> Create an account to have reccomended movies based off of all your watch history.</div>
+     <div class = "explorer" id = "createAccount" (click)="route('user-login')">Create Account</div>
       
   </div>
-  <div>
-      
-  </div>
+  <div class = "bContainer">
+    <div id = "save">Less time searching, more time watching.  </div>
+    <img id = "logo2" src = "assets/nameLogoV2.png">
+    </div>
 </div>
 
 </ion-content>
-<!-- <span id = "movies"> More movies </span>
-<span id = "places"> less places </span> -->
+
