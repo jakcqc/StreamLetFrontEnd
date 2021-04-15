@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
-
+import { Router,NavigationEnd} from '@angular/router';
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -15,14 +15,20 @@ export class WelcomeComponent implements OnInit {
   bigFontSize = "120px";
   bigHeight;
   smallHeight = .50;
-  constructor(platform:Platform) {
+  constructor(platform:Platform,private router: Router) {
     
     platform.ready().then(() => {
       const speal = document.querySelector<HTMLDivElement>('#movies');
       const logo = document.querySelector<HTMLElement>('#logo');
+      const info = document.querySelectorAll<HTMLElement>('.bContainer');
         this.width = platform.width();
         this.height = platform.height();
-        
+        if(this.width<700){
+          info.forEach(element => {
+             element.style.height = "auto";
+
+          });
+        }
         if(this.width < 900){
           logo.style.width = "150px";
           speal.style.width = this.smallWidth;
@@ -39,10 +45,16 @@ export class WelcomeComponent implements OnInit {
     platform.resize.subscribe(async () => {
       const speal = document.querySelector<HTMLDivElement>('#movies');
       const logo = document.querySelector<HTMLElement>('#logo');
+      const info = document.querySelectorAll<HTMLElement>('.bContainer');
       this.width = platform.width();
         this.height = platform.height();
         
+        if(this.width<700){
+          info.forEach(element => {
+             element.style.height = "auto";
 
+          });
+        }
         if(this.width < 900){
         
           logo.style.width = "150px";
@@ -60,5 +72,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {}
-
+  route(name){
+    this.router.navigate([name]);
+  }
 }
