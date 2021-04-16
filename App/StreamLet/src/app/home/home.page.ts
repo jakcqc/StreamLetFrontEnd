@@ -7,6 +7,7 @@ import { MovieServiceService } from '../services/movie-service.service';
 import { IonSlides} from '@ionic/angular';
 import { Card } from '../models/card.model';
 import { HttpClient } from '@angular/common/http';
+import { GenreContainer } from '../models/genre-container.model';
 
 @Component({
   selector: 'app-home',
@@ -23,10 +24,18 @@ export class HomePage {
     "Example","After",2,3,4,5,6,7,8,9,10,11,12,13,14,15
   ]
   cardsNew = [];
+
+  genreContainer = new GenreContainer(this.http);
+
+
   cardsAction = [];
+  cardsBiography = [];
   cardsComedy = [];
   intComedy = 1;
   intAction = 1;
+  intBiography= 1;
+  isOnComedy=false;
+  isOnBiography = false;
 
   //total movie types to presented on the main page
   //first load fills these with the movie images
@@ -121,9 +130,6 @@ export class HomePage {
     let totalCards = document.querySelectorAll<HTMLElement>("ion-slide");
     this.setGenreColor();
     this.totalMovieGenres = this.movies.getMovieImage(this.totalMovieGenres);
-    this.getComedies();
-    this.getAction();
-  
   }
   routePage(name){
     this.router.navigate([name]);
@@ -179,6 +185,7 @@ export class HomePage {
     const huluE = document.querySelector<HTMLAnchorElement>('#netflixLink');
     const PrimeE = document.querySelector<HTMLAnchorElement>('#netflixLink');
     netflixE.href = movieInfo.getNetflix();
+    // console.log(movieImage.getNetflix());
     huluE.href = movieInfo.getHulu();
     PrimeE.href = movieInfo.getPrime();
 
@@ -233,8 +240,8 @@ export class HomePage {
   
   }
 
-  getComedies(){
-    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
+  getContent(genreNum, intNum){
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre='+genreNum+'&page='+intNum).toPromise().then(
       data => {
         let parsedData = JSON.parse(JSON.stringify(data));
         for(let i = 0; i < parsedData.length; i++){
@@ -247,6 +254,23 @@ export class HomePage {
     );
     this.intComedy++;
     if(this.intComedy == 2)
+      this.getComedies();
+  }
+
+  getComedies(){
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
+      data => {
+        let parsedData = JSON.parse(JSON.stringify(data));
+        for(let i = 0; i < parsedData.length; i++){
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          if(card.getPoster() != null)
+            this.genreContainer.cardsComedy.push(card);
+        }
+      }
+    );
+    this.genreContainer.intComedy++;
+    if(this.genreContainer.intComedy == 2)
       this.getComedies();
   }
 
@@ -267,5 +291,24 @@ export class HomePage {
     this.intAction++;
     if(this.intAction == 2)
       this.getAction();
+  }
+
+  getBiography(){
+    this.http.get('http://18.188.243.225:9091/broadQuery?genre=1&page='+this.intAction).toPromise().then(
+      data => {
+        let parsedData = JSON.parse(JSON.stringify(data));
+
+        for(let i = 0; i < parsedData.length; i++){
+          let obj = parsedData[i];
+          let card = new Card(obj);
+          if(card.getPoster() != null)
+            this.cardsBiography.push(card);
+        }
+      }
+    );
+    console.log(this.cardsAction);
+    this.intBiography++;
+    if(this.intBiography == 2)
+      this.getBiography();
   }
 }

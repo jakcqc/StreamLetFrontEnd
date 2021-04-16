@@ -48,105 +48,558 @@
             </div>
         </div>
 
+        <!-- Rendering buttons -->
+        <ion-list>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAction?'solid':'outline'" (click)='genreContainer.isOnAction = !genreContainer.isOnAction'>Action</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAdventure?'solid':'outline'" (click)='genreContainer.isOnAdventure = !genreContainer.isOnAdventure'>Adventure</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAnimation?'solid':'outline'" (click)='genreContainer.isOnAnimation = !genreContainer.isOnAnimation'>Animation</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnBiography?'solid':'outline'" (click)='genreContainer.isOnBiography = !genreContainer.isOnBiography'>Biography</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnComedy?'solid':'outline'" (click)='genreContainer.isOnComedy = !genreContainer.isOnComedy'>Comedy</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnCrime?'solid':'outline'" (click)='genreContainer.isOnCrime = !genreContainer.isOnCrime'>Crime</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnDocumentary?'solid':'outline'" (click)='genreContainer.isOnDocumentary = !genreContainer.isOnDocumentary'>Documentary</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnDrama?'solid':'outline'" (click)='genreContainer.isOnDrama = !genreContainer.isOnDrama'>Drama</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFamily?'solid':'outline'" (click)='genreContainer.isOnFamily = !genreContainer.isOnFamily'>Family</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFantasy?'solid':'outline'" (click)='genreContainer.isOnFantasy = !genreContainer.isOnFantasy'>Fantasy</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFilmNoir?'solid':'outline'" (click)='genreContainer.isOnFilmNoir = !genreContainer.isOnFilmNoir'>Film Noir</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnGameShow?'solid':'outline'" (click)='genreContainer.isOnGameShow = !genreContainer.isOnGameShow'>Game Show</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnHistory?'solid':'outline'" (click)='genreContainer.isOnHistory = !genreContainer.isOnHistory'>History</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnHorror?'solid':'outline'" (click)='genreContainer.isOnHorror = !genreContainer.isOnHorror'>Horror</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMusic?'solid':'outline'" (click)='genreContainer.isOnMusic = !genreContainer.isOnMusic'>Music</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMusical?'solid':'outline'" (click)='genreContainer.isOnMusical = !genreContainer.isOnMusical'>Musical</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMystery?'solid':'outline'" (click)='genreContainer.isOnMystery = !genreContainer.isOnMystery'>Mystery</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnNews?'solid':'outline'" (click)='genreContainer.isOnNews = !genreContainer.isOnNews'>News</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnReality?'solid':'outline'" (click)='genreContainer.isOnReality = !genreContainer.isOnReality'>Reality</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnRomance?'solid':'outline'" (click)='genreContainer.isOnRomance = !genreContainer.isOnRomance'>Romance</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnScienceFiction?'solid':'outline'" (click)='genreContainer.isOnScienceFiction = !genreContainer.isOnScienceFiction'>Science Fiction</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnShort?'solid':'outline'" (click)='genreContainer.isOnShort = !genreContainer.isOnShort'>Short</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnSport?'solid':'outline'" (click)='genreContainer.isOnSport = !genreContainer.isOnSport'>Sport</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnTalkShow?'solid':'outline'" (click)='genreContainer.isOnTalkShow = !genreContainer.isOnTalkShow'>Talk Show</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnThriller?'solid':'outline'" (click)='genreContainer.isOnThriller = !genreContainer.isOnThriller'>Thriller</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnWar?'solid':'outline'" (click)='genreContainer.isOnWar = !genreContainer.isOnWar'>War</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnWestern?'solid':'outline'" (click)='genreContainer.isOnWestern = !genreContainer.isOnWestern'>Western</ion-button>
+        </ion-list>
+
         <div id="contentWrapper" (click)="resetNorm()"></div>
         <ion-grid>
-            <ion-row>
+
+
+              <ion-row *ngIf="genreContainer.isOnAction">
                 <div class="container">
-                    <span class="genreTitle">Reccomended</span>
-
-                    <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }">
-
-                        <ion-slide *ngFor="let card of cardsNew" (click)="movieInfo(card)">
-                            <ion-col>
-
-                                <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
-                                <ion-label>{{ card.getImdbRating() }}/100</ion-label>
-                            </ion-col>
-                        </ion-slide>
-                    </ion-slides>
+                  <span class="genreTitle">Action</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides0 (ionSlideReachEnd)="genreContainer.getAction()">
+                  <ion-slide id="Action" *ngFor="let card of genreContainer.cardsAction" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
                 </div>
                 <div class="bHolder">
-                    <div class="buttons" (click)="slides.slidePrev()"> </div>
-                    <div class="buttons" (click)="slides.slideNext()"> > </div>
+                  <div class="buttons" (click)="slides0.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides0.slideNext()"> > </div>
                 </div>
-            </ion-row>
-            <ion-row>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnAdventure">
                 <div class="container">
-                    <span class="genreTitle">Continue Watching</span>
-                    <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides1>
-                        <ion-slide *ngFor="let card of cards" (click)="movieInfo(card)">
-                            <ion-col>
-
-                                <ion-img class="movieImage" src="https://i.pinimg.com/564x/fc/95/ca/fc95ca81ca34fba083e38fa6406c87be.jpg"></ion-img>
-                                <ion-label> {{ card }}</ion-label>
-                            </ion-col>
-
-                        </ion-slide>
-                    </ion-slides>
+                  <span class="genreTitle">Adventure</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides1 (ionSlideReachEnd)="genreContainer.getAdventure()">
+                  <ion-slide id="Adventure" *ngFor="let card of genreContainer.cardsAdventure" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
                 </div>
                 <div class="bHolder">
-                    <div class="buttons" (click)="slides1.slidePrev()">
-                        < </div>
-                            <div class="buttons" (click)="slides1.slideNext()"> > </div>
-                    </div>
-            </ion-row>
-            <ion-row>
+                  <div class="buttons" (click)="slides1.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides1.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnAnimation">
                 <div class="container">
-                    <span class="genreTitle">New Releases</span>
-                    <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides2>
-                        <ion-slide *ngFor="let card of cards" (click)="movieInfo(card)">
-                            <ion-col>
-
-                                <ion-img class="movieImage" src="https://www.indiewire.com/wp-content/uploads/2019/12/JokerPoster1200_5ca3c435318d42.29270548.jpg?w=800"></ion-img>
-                                <ion-label> {{ card }}</ion-label>
-                            </ion-col>
-                        </ion-slide>
-                    </ion-slides>
+                  <span class="genreTitle">Animation</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides2 (ionSlideReachEnd)="genreContainer.getAnimation()">
+                  <ion-slide id="Animation" *ngFor="let card of genreContainer.cardsAnimation" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
                 </div>
                 <div class="bHolder">
-                    <div class="buttons" (click)="slides2.slidePrev()">
-                        < </div>
-                            <div class="buttons" (click)="slides2.slideNext()"> > </div>
-                    </div>
-            </ion-row>
-            <ion-row>
+                  <div class="buttons" (click)="slides2.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides2.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnBiography">
                 <div class="container">
-                    <span class="genreTitle">Comedies</span>
-                    <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides3 (ionSlideReachEnd)="getComedies()">
-                        <ion-slide id="comedies" *ngFor="let card of cardsComedy" (click)="movieInfo(card)">
-                            <ion-col>
-
-                                <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
-                                <ion-label> {{ card.getImdbRating() }}/100</ion-label>
-                            </ion-col>
-                        </ion-slide>
-                    </ion-slides>
+                  <span class="genreTitle">Biography</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides3 (ionSlideReachEnd)="genreContainer.getBiography()">
+                  <ion-slide id="Biography" *ngFor="let card of genreContainer.cardsBiography" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
                 </div>
                 <div class="bHolder">
-                    <div class="buttons" (click)="slides3.slidePrev()">
-                        < </div>
-                            <div class="buttons" (click)="slides3.slideNext()"> > </div>
-                    </div>
-            </ion-row>
-            <ion-row>
+                  <div class="buttons" (click)="slides3.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides3.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnComedy">
                 <div class="container">
-                    <span class="genreTitle">Action</span>
-                    <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides4 (ionSlideReachEnd)="getAction()">
-                        <ion-slide id="actions" *ngFor="let card of cardsAction" (click)="movieInfo(card)">
-                            <ion-col>
-
-                                <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
-                                <ion-label> {{ card.getImdbRating() }}/100</ion-label>
-                            </ion-col>
-                        </ion-slide>
-                    </ion-slides>
+                  <span class="genreTitle">Comedy</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides4 (ionSlideReachEnd)="genreContainer.getComedy()">
+                  <ion-slide id="Comedy" *ngFor="let card of genreContainer.cardsComedy" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
                 </div>
                 <div class="bHolder">
-                    <div class="buttons" (click)="slides4.slidePrev()">
-                        < </div>
-                            <div class="buttons" (click)="slides4.slideNext()"> > </div>
-                    </div>
-            </ion-row>
+                  <div class="buttons" (click)="slides4.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides4.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnCrime">
+                <div class="container">
+                  <span class="genreTitle">Crime</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides5 (ionSlideReachEnd)="genreContainer.getCrime()">
+                  <ion-slide id="Crime" *ngFor="let card of genreContainer.cardsCrime" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides5.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides5.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnDocumentary">
+                <div class="container">
+                  <span class="genreTitle">Documentary</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides6 (ionSlideReachEnd)="genreContainer.getDocumentary()">
+                  <ion-slide id="Documentary" *ngFor="let card of genreContainer.cardsDocumentary" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides6.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides6.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnDrama">
+                <div class="container">
+                  <span class="genreTitle">Drama</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides7 (ionSlideReachEnd)="genreContainer.getDrama()">
+                  <ion-slide id="Drama" *ngFor="let card of genreContainer.cardsDrama" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides7.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides7.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnFamily">
+                <div class="container">
+                  <span class="genreTitle">Family</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides8 (ionSlideReachEnd)="genreContainer.getFamily()">
+                  <ion-slide id="Family" *ngFor="let card of genreContainer.cardsFamily" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides8.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides8.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnFantasy">
+                <div class="container">
+                  <span class="genreTitle">Fantasy</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides9 (ionSlideReachEnd)="genreContainer.getFantasy()">
+                  <ion-slide id="Fantasy" *ngFor="let card of genreContainer.cardsFantasy" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides9.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides9.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnFilmNoir">
+                <div class="container">
+                  <span class="genreTitle">FilmNoir</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides10 (ionSlideReachEnd)="genreContainer.getFilmNoir()">
+                  <ion-slide id="FilmNoir" *ngFor="let card of genreContainer.cardsFilmNoir" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides10.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides10.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnGameShow">
+                <div class="container">
+                  <span class="genreTitle">GameShow</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides11 (ionSlideReachEnd)="genreContainer.getGameShow()">
+                  <ion-slide id="GameShow" *ngFor="let card of genreContainer.cardsGameShow" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides11.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides11.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnHistory">
+                <div class="container">
+                  <span class="genreTitle">History</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides12 (ionSlideReachEnd)="genreContainer.getHistory()">
+                  <ion-slide id="History" *ngFor="let card of genreContainer.cardsHistory" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides12.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides12.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnHorror">
+                <div class="container">
+                  <span class="genreTitle">Horror</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides13 (ionSlideReachEnd)="genreContainer.getHorror()">
+                  <ion-slide id="Horror" *ngFor="let card of genreContainer.cardsHorror" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides13.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides13.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnMusic">
+                <div class="container">
+                  <span class="genreTitle">Music</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides14 (ionSlideReachEnd)="genreContainer.getMusic()">
+                  <ion-slide id="Music" *ngFor="let card of genreContainer.cardsMusic" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides14.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides14.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnMusical">
+                <div class="container">
+                  <span class="genreTitle">Musical</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides15 (ionSlideReachEnd)="genreContainer.getMusical()">
+                  <ion-slide id="Musical" *ngFor="let card of genreContainer.cardsMusical" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides15.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides15.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnMystery">
+                <div class="container">
+                  <span class="genreTitle">Mystery</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides16 (ionSlideReachEnd)="genreContainer.getMystery()">
+                  <ion-slide id="Mystery" *ngFor="let card of genreContainer.cardsMystery" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides16.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides16.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnNews">
+                <div class="container">
+                  <span class="genreTitle">News</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides17 (ionSlideReachEnd)="genreContainer.getNews()">
+                  <ion-slide id="News" *ngFor="let card of genreContainer.cardsNews" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides17.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides17.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnReality">
+                <div class="container">
+                  <span class="genreTitle">Reality</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides18 (ionSlideReachEnd)="genreContainer.getReality()">
+                  <ion-slide id="Reality" *ngFor="let card of genreContainer.cardsReality" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides18.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides18.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnRomance">
+                <div class="container">
+                  <span class="genreTitle">Romance</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides19 (ionSlideReachEnd)="genreContainer.getRomance()">
+                  <ion-slide id="Romance" *ngFor="let card of genreContainer.cardsRomance" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides19.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides19.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnScienceFiction">
+                <div class="container">
+                  <span class="genreTitle">ScienceFiction</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides20 (ionSlideReachEnd)="genreContainer.getScienceFiction()">
+                  <ion-slide id="ScienceFiction" *ngFor="let card of genreContainer.cardsScienceFiction" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides20.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides20.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnShort">
+                <div class="container">
+                  <span class="genreTitle">Short</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides21 (ionSlideReachEnd)="genreContainer.getShort()">
+                  <ion-slide id="Short" *ngFor="let card of genreContainer.cardsShort" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides21.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides21.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnSport">
+                <div class="container">
+                  <span class="genreTitle">Sport</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides22 (ionSlideReachEnd)="genreContainer.getSport()">
+                  <ion-slide id="Sport" *ngFor="let card of genreContainer.cardsSport" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides22.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides22.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnTalkShow">
+                <div class="container">
+                  <span class="genreTitle">TalkShow</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides23 (ionSlideReachEnd)="genreContainer.getTalkShow()">
+                  <ion-slide id="TalkShow" *ngFor="let card of genreContainer.cardsTalkShow" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides23.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides23.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnThriller">
+                <div class="container">
+                  <span class="genreTitle">Thriller</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides24 (ionSlideReachEnd)="genreContainer.getThriller()">
+                  <ion-slide id="Thriller" *ngFor="let card of genreContainer.cardsThriller" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides24.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides24.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnWar">
+                <div class="container">
+                  <span class="genreTitle">War</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides25 (ionSlideReachEnd)="genreContainer.getWar()">
+                  <ion-slide id="War" *ngFor="let card of genreContainer.cardsWar" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides25.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides25.slideNext()"> > </div>
+                </div>
+              </ion-row>
+              <ion-row *ngIf="genreContainer.isOnWestern">
+                <div class="container">
+                  <span class="genreTitle">Western</span>
+                  <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" #slides26 (ionSlideReachEnd)="genreContainer.getWestern()">
+                  <ion-slide id="Western" *ngFor="let card of genreContainer.cardsWestern" (click)="movieInfo(card)">
+                  <ion-col>
+                    <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                    <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+                  </ion-col>
+                  </ion-slide>
+                  </ion-slides>
+                </div>
+                <div class="bHolder">
+                  <div class="buttons" (click)="slides26.slidePrev()">
+                    < 
+                  </div>
+                  <div class="buttons" (click)="slides26.slideNext()"> > </div>
+                </div>
+              </ion-row>
+
+
+
+              <!-- HERE -->
             <ion-row>
                 <ion-col size="6">
                     StreamLet 2021
