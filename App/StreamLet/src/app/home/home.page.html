@@ -9,15 +9,52 @@
             </ion-title>
         </div>
         <span id="endToolbar" slot="end">
-
-    <span class = "buttons" (click)= "routePage('user-login')">Account</span>
-        <ion-item>
-            <ion-searchbar (search)="search($event.target.value)"></ion-searchbar>
+        
+    <ion-item>
+            <ion-searchbar (mouseenter) = "hoverChange(0)" (mouseleave) = "hoverChange(1)" (click) = "format()" (search)="search($event.target.value)"></ion-searchbar>
         </ion-item>
+        <ion-item>
+            <span id = "genreToggle" class = "buttons"  (click)= "showGenre()">Genres</span>
+            
+      </ion-item>
+        <ion-item>
+            <span id = "accounter" class = "buttons"  (click)= "routePage('user-login')">Account</span>
+        </ion-item>
+        
         </span>
     </ion-toolbar>
 </ion-header>
 
+<!-- Rendering buttons -->
+        <ion-list id = "buttonHolder" (click) = "setGenreColor()">
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAction?'solid':'outline'" (click)='genreContainer.isOnAction = !genreContainer.isOnAction'>Action</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAdventure?'solid':'outline'" (click)='genreContainer.isOnAdventure = !genreContainer.isOnAdventure'>Adventure</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAnimation?'solid':'outline'" (click)='genreContainer.isOnAnimation = !genreContainer.isOnAnimation'>Animation</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnBiography?'solid':'outline'" (click)='genreContainer.isOnBiography = !genreContainer.isOnBiography'>Biography</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnComedy?'solid':'outline'" (click)='genreContainer.isOnComedy = !genreContainer.isOnComedy'>Comedy</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnCrime?'solid':'outline'" (click)='genreContainer.isOnCrime = !genreContainer.isOnCrime'>Crime</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnDocumentary?'solid':'outline'" (click)='genreContainer.isOnDocumentary = !genreContainer.isOnDocumentary'>Documentary</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnDrama?'solid':'outline'" (click)='genreContainer.isOnDrama = !genreContainer.isOnDrama'>Drama</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFamily?'solid':'outline'" (click)='genreContainer.isOnFamily = !genreContainer.isOnFamily'>Family</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFantasy?'solid':'outline'" (click)='genreContainer.isOnFantasy = !genreContainer.isOnFantasy'>Fantasy</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFilmNoir?'solid':'outline'" (click)='genreContainer.isOnFilmNoir = !genreContainer.isOnFilmNoir'>Film Noir</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnGameShow?'solid':'outline'" (click)='genreContainer.isOnGameShow = !genreContainer.isOnGameShow'>Game Show</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnHistory?'solid':'outline'" (click)='genreContainer.isOnHistory = !genreContainer.isOnHistory'>History</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnHorror?'solid':'outline'" (click)='genreContainer.isOnHorror = !genreContainer.isOnHorror'>Horror</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMusic?'solid':'outline'" (click)='genreContainer.isOnMusic = !genreContainer.isOnMusic'>Music</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMusical?'solid':'outline'" (click)='genreContainer.isOnMusical = !genreContainer.isOnMusical'>Musical</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMystery?'solid':'outline'" (click)='genreContainer.isOnMystery = !genreContainer.isOnMystery'>Mystery</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnNews?'solid':'outline'" (click)='genreContainer.isOnNews = !genreContainer.isOnNews'>News</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnReality?'solid':'outline'" (click)='genreContainer.isOnReality = !genreContainer.isOnReality'>Reality</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnRomance?'solid':'outline'" (click)='genreContainer.isOnRomance = !genreContainer.isOnRomance'>Romance</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnScienceFiction?'solid':'outline'" (click)='genreContainer.isOnScienceFiction = !genreContainer.isOnScienceFiction'>Science Fiction</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnShort?'solid':'outline'" (click)='genreContainer.isOnShort = !genreContainer.isOnShort'>Short</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnSport?'solid':'outline'" (click)='genreContainer.isOnSport = !genreContainer.isOnSport'>Sport</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnTalkShow?'solid':'outline'" (click)='genreContainer.isOnTalkShow = !genreContainer.isOnTalkShow'>Talk Show</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnThriller?'solid':'outline'" (click)='genreContainer.isOnThriller = !genreContainer.isOnThriller'>Thriller</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnWar?'solid':'outline'" (click)='genreContainer.isOnWar = !genreContainer.isOnWar'>War</ion-button>
+            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnWestern?'solid':'outline'" (click)='genreContainer.isOnWestern = !genreContainer.isOnWestern'>Western</ion-button>
+        </ion-list>
 <ion-content [fullscreen]="true" id="bodyMain">
     <div id="scrollMain">
         <div id="contentMain">
@@ -48,36 +85,7 @@
             </div>
         </div>
 
-        <!-- Rendering buttons -->
-        <ion-list>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAction?'solid':'outline'" (click)='genreContainer.isOnAction = !genreContainer.isOnAction'>Action</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAdventure?'solid':'outline'" (click)='genreContainer.isOnAdventure = !genreContainer.isOnAdventure'>Adventure</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnAnimation?'solid':'outline'" (click)='genreContainer.isOnAnimation = !genreContainer.isOnAnimation'>Animation</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnBiography?'solid':'outline'" (click)='genreContainer.isOnBiography = !genreContainer.isOnBiography'>Biography</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnComedy?'solid':'outline'" (click)='genreContainer.isOnComedy = !genreContainer.isOnComedy'>Comedy</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnCrime?'solid':'outline'" (click)='genreContainer.isOnCrime = !genreContainer.isOnCrime'>Crime</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnDocumentary?'solid':'outline'" (click)='genreContainer.isOnDocumentary = !genreContainer.isOnDocumentary'>Documentary</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnDrama?'solid':'outline'" (click)='genreContainer.isOnDrama = !genreContainer.isOnDrama'>Drama</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFamily?'solid':'outline'" (click)='genreContainer.isOnFamily = !genreContainer.isOnFamily'>Family</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFantasy?'solid':'outline'" (click)='genreContainer.isOnFantasy = !genreContainer.isOnFantasy'>Fantasy</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnFilmNoir?'solid':'outline'" (click)='genreContainer.isOnFilmNoir = !genreContainer.isOnFilmNoir'>Film Noir</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnGameShow?'solid':'outline'" (click)='genreContainer.isOnGameShow = !genreContainer.isOnGameShow'>Game Show</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnHistory?'solid':'outline'" (click)='genreContainer.isOnHistory = !genreContainer.isOnHistory'>History</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnHorror?'solid':'outline'" (click)='genreContainer.isOnHorror = !genreContainer.isOnHorror'>Horror</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMusic?'solid':'outline'" (click)='genreContainer.isOnMusic = !genreContainer.isOnMusic'>Music</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMusical?'solid':'outline'" (click)='genreContainer.isOnMusical = !genreContainer.isOnMusical'>Musical</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnMystery?'solid':'outline'" (click)='genreContainer.isOnMystery = !genreContainer.isOnMystery'>Mystery</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnNews?'solid':'outline'" (click)='genreContainer.isOnNews = !genreContainer.isOnNews'>News</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnReality?'solid':'outline'" (click)='genreContainer.isOnReality = !genreContainer.isOnReality'>Reality</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnRomance?'solid':'outline'" (click)='genreContainer.isOnRomance = !genreContainer.isOnRomance'>Romance</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnScienceFiction?'solid':'outline'" (click)='genreContainer.isOnScienceFiction = !genreContainer.isOnScienceFiction'>Science Fiction</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnShort?'solid':'outline'" (click)='genreContainer.isOnShort = !genreContainer.isOnShort'>Short</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnSport?'solid':'outline'" (click)='genreContainer.isOnSport = !genreContainer.isOnSport'>Sport</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnTalkShow?'solid':'outline'" (click)='genreContainer.isOnTalkShow = !genreContainer.isOnTalkShow'>Talk Show</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnThriller?'solid':'outline'" (click)='genreContainer.isOnThriller = !genreContainer.isOnThriller'>Thriller</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnWar?'solid':'outline'" (click)='genreContainer.isOnWar = !genreContainer.isOnWar'>War</ion-button>
-            <ion-button size = "small" shape="round" [fill]="genreContainer.isOnWestern?'solid':'outline'" (click)='genreContainer.isOnWestern = !genreContainer.isOnWestern'>Western</ion-button>
-        </ion-list>
+        
 
         <div id="contentWrapper" (click)="resetNorm()"></div>
         <ion-grid>

@@ -2,17 +2,24 @@
     <ion-toolbar>
         <div id="titleBackground">
             <ion-title slot="start">
-                <img id="logo" src="assets/nameV3.png">
+                <img (click)= "routePage('home')" id = "logo" src = "assets/nameLogoV2.png">
             </ion-title>
         </div>
         <span id="endToolbar" slot="end">
-            <span class = "buttons" (click)= "routePage('user-login')">Account</span>
+            
+       
         <ion-item>
-            <ion-searchbar (search)="updateSearch($event.target.value)"></ion-searchbar>
+            <span id = "accounter" class = "buttons"  (click)= "routePage('user-login')">Account</span>
         </ion-item>
+        
         </span>
+        
     </ion-toolbar>
+    
 </ion-header>
+ <ion-item>
+            <ion-searchbar  (search)="updateSearch($event.target.value)"></ion-searchbar>
+        </ion-item>
 <ion-content [fullscreen]="true" id="bodyMain">
     <div id="scrollMain">
         <div id="contentMain">

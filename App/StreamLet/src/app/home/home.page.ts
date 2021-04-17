@@ -24,7 +24,7 @@ export class HomePage {
     "Example","After",2,3,4,5,6,7,8,9,10,11,12,13,14,15
   ]
   cardsNew = [];
-
+  
   genreContainer = new GenreContainer(this.http);
 
 
@@ -51,6 +51,7 @@ export class HomePage {
   thriller : []
   };
   movieUpdater = 5;
+  smallSearch;
   //color array for underline categories 
   colors = [
     "darkred",
@@ -79,9 +80,13 @@ export class HomePage {
         this.width = platform.width();
         this.height = platform.height();
         const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+        const logo = document.querySelector<HTMLImageElement>('#logo');
+        const account = document.querySelector<HTMLImageElement>('#accounter');
         if(this.width < 800){
+          this.smallSearch = 1;
         const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
         
+        logo.src = "assets/icon/sIconV3.png";
         buttonHolder.forEach(element => {
           element.style.display = "none";
         });
@@ -90,10 +95,15 @@ export class HomePage {
           element.style.height = "auto";
         });
         }else{
+          logo.src = "assets/nameLogoV2.png";
+          this.smallSearch = 0;
           slides.forEach(element => {
             element.style.width = "160px";
             element.style.height = "auto";
           });
+        }
+        if(this.width < 500){
+          account.innerHTML = "| | |";
         }
       
       });
@@ -102,9 +112,14 @@ export class HomePage {
         this.width = platform.width();
         this.height = platform.height();
         const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+        const logo = document.querySelector<HTMLImageElement>('#logo');
+        const account = document.querySelector<HTMLImageElement>('#accounter');
+
       if(this.width < 800){
+        this.smallSearch = 1;
       const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
       
+        logo.src = "assets/icon/sIconV3.png";
       buttonHolder.forEach(element => {
         element.style.display = "none";
       });
@@ -112,17 +127,65 @@ export class HomePage {
         element.style.width = "100px";
         element.style.height = "auto";
       });
-      }else{
+      }
+      if(this.width < 500){
+        account.innerHTML = "| | |";
+      }
+      if(this.width > 800){
+        logo.src = "assets/nameLogoV2.png";
+        this.smallSearch = 0;
         slides.forEach(element => {
           element.style.width = "160px";
           element.style.height = "auto";
+          account.innerHTML = "Account";
         });
       }
+      
       });
     
     
   }
+  tog = 0;
+  showGenre(){
+    const genres = document.querySelector<HTMLElement>("#buttonHolder");
+    const bToggle = document.querySelector<HTMLElement>('#genreToggle');
   
+
+    if(this.tog == 0){
+      bToggle.innerHTML = "Genres";
+    
+    if(this.smallSearch == 1){
+        genres.style.height = "700px";
+    }else{
+      genres.style.height = "300px";
+    }
+    this.tog = 1;
+    }else{
+      bToggle.innerHTML = "Genres";
+      genres.style.height = "0";
+      this.tog =0;
+    }
+    
+  }
+  hoverChange(type){
+    if(this.smallSearch == 0){
+      const searcher = document.querySelector<HTMLElement>("ion-searchbar");
+      if(type == 0){
+          searcher.style.width = "300px";
+      }
+      if(type == 1){
+        searcher.style.width = "60px";
+      }
+    }
+    
+  }
+  format(){
+    if(this.smallSearch == 1){
+      this.router.navigate(['find', " "]);
+    }
+    
+    
+  }
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
     let x = 0;
@@ -235,6 +298,9 @@ export class HomePage {
     test.forEach(element => {
       element.style.textDecorationColor = this.colors[i];
       i++;
+      if(i>this.colors.length){
+        i = 0;
+      }
 
     });
   

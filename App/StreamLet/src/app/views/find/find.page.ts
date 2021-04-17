@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { Card } from '../../models/card.model';
 import { HttpClient } from '@angular/common/http';
-
+import { Router,NavigationEnd} from '@angular/router';
 @Component({
   selector: 'app-find',
   templateUrl: './find.page.html',
   styleUrls: ['./find.page.scss'],
 })
 export class FindPage implements OnInit {
-
+    smallSearch;
     width;
     height;
     smallWidth = "auto";
@@ -22,40 +22,63 @@ export class FindPage implements OnInit {
     inputData = "";
     isDataAvailable = false;
     
-    constructor(platform:Platform, private activatedRoute: ActivatedRoute, private http: HttpClient) {
+    constructor(platform:Platform, private activatedRoute: ActivatedRoute, private http: HttpClient,private router: Router) {
         this.activatedRoute.params.subscribe(data => {
             this.inputData = data.search;
         })
     platform.ready().then(() => {
-        this.width = platform.width();
-        this.height = platform.height();
-        const speal = document.querySelector<HTMLDivElement>('#movies');
-        // if(this.width < 900){
-        
-        //     speal.style.width = this.smallWidth;
-        //     speal.style.height = this.height*this.smallHeight + "px";
-        //     speal.style.fontSize = this.smallFontSize;
-        //     console.log(speal.style.height);
-
-        // }else{
-        //     speal.style.fontSize = this.bigFontSize;
-        //     speal.style.width = this.bigWidth;
-        // }
-    }); 
+      this.width = platform.width();
+      this.height = platform.height();
+      const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+      const logo = document.querySelector<HTMLImageElement>('#logo');
+      if(this.width < 800){
+        this.smallSearch = 1;
+      const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
+      
+      logo.src = "assets/icon/sIconV3.png";
+      buttonHolder.forEach(element => {
+        element.style.display = "none";
+      });
+      slides.forEach(element => {
+        element.style.width = "100px";
+        element.style.height = "auto";
+      });
+      }else{
+        logo.src = "assets/nameLogoV2.png";
+        this.smallSearch = 0;
+        slides.forEach(element => {
+          element.style.width = "160px";
+          element.style.height = "auto";
+        });
+      }
+    
+    });
     platform.resize.subscribe(async () => {
-        this.width = platform.width();
-        this.height = platform.height();
-        const speal = document.querySelector<HTMLDivElement>('#movies');
-
-        // if(this.width < 900){   
-        //     speal.style.fontSize = this.smallFontSize;
-        //     speal.style.width = this.smallWidth;
-        //     speal.style.height = this.height*this.smallHeight + "px";
-
-        // }else{
-        //     speal.style.fontSize = this.bigFontSize;
-        //     speal.style.width = this.bigWidth;
-        // }
+      
+      this.width = platform.width();
+      this.height = platform.height();
+      const slides = document.querySelectorAll<HTMLElement>('.movieImage');
+      const logo = document.querySelector<HTMLImageElement>('#logo');
+    if(this.width < 800){
+      this.smallSearch = 1;
+    const buttonHolder = document.querySelectorAll<HTMLDivElement>('.bHolder');
+    
+      logo.src = "assets/icon/sIconV3.png";
+    buttonHolder.forEach(element => {
+      element.style.display = "none";
+    });
+    slides.forEach(element => {
+      element.style.width = "100px";
+      element.style.height = "auto";
+    });
+    }else{
+      logo.src = "assets/nameLogoV2.png";
+      this.smallSearch = 0;
+      slides.forEach(element => {
+        element.style.width = "160px";
+        element.style.height = "auto";
+      });
+    }
     
     });
 }
@@ -80,12 +103,11 @@ getSearch(input){
             console.log(card);
             this.cardsSearch.push(card);
         }
-        console.log(this.cardsSearch);
+        
 
     }
     );
-    console.log("here");
-    console.log(this.cardsSearch);
+    
     this.intSearch++;
 }
 
@@ -93,22 +115,21 @@ updateSearch(input){
   this.cardsSearch = [];
   this.http.get('http://18.188.243.225:9091/searchQuery?title='+input).toPromise().then(
       data => {
-          console.log(data);
+          
           let parsedData = JSON.parse(JSON.stringify(data));
-          console.log(parsedData.length);
+          
 
       for(let i = 0; i < parsedData.length; i++){
           let obj = parsedData[i];
           let card = new Card(obj);
-          console.log(card);
+          
           this.cardsSearch.push(card);
       }
-      console.log(this.cardsSearch);
+      
 
   }
   );
-  console.log("here");
-  console.log(this.cardsSearch);
+  
   this.intSearch++;
 }
 movieInfo(movieInfo){
@@ -139,6 +160,9 @@ let currentWidth;
   
   this.populateCard(movieImage,currentWidth, movieInfo);
   
+}
+routePage(name){
+  this.router.navigate([name]);
 }
 populateCard(movieImage,currentWidth, movieInfo){
   const displayer = document.getElementById("cardMain");
