@@ -1,14 +1,44 @@
-<ion-content [fullscreen]="true" id = "bodyMain" >
-<img id = "logo" src = "assets/nameV3.png">
-<div class="loginCard">
-  <div >
-    Sign up to start getting reccomended movies based off your movie history and preferences! 
-  </div>
-  <div id="formCard">
+<ion-content [fullscreen]="true" >
+<div id = "background">
+<div class="lamp">
+    <div class="lava">
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob"></div>
+      <div class="blob top"></div>
+      <div class="blob bottom"></div>
+      
+    </div>
+</div>
+<svg id = "back" xmlns="http://www.w3.org/2000/svg" version="1.1">
+  <defs>
+    <filter id="goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
+      
+    </filter>
+  </defs>
+</svg>
+<img id = "logo" (click) = "routePage('home')" src = "assets/nameLogoV2.png">
+<div id="loginCard">
     <form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)">
-        <ion-textarea id = "textStuff" formControlName="content" placeholder = "write a comment :)"></ion-textarea>
+    <div id = "createAccount">Create your account and start getting reccomended</div>
+    
+        <ion-item><ion-input class = "textStuff" formControlName="content" placeholder = "Username"></ion-input></ion-item>
+    
+    
+        <ion-item><ion-input class = "textStuff" formControlName="content" placeholder = "Password" type="password"></ion-input></ion-item>
+        <ion-item><ion-input class = "textStuff" formControlName="content" placeholder = "Confirm Password" type="password"></ion-input></ion-item>
+
+         <div id = "buttonSub" class = "formInfo"><button id = "submitButton" ion-button type="submit" block>Create Account</button></div>  
     </form>
   </div>
-  </div>
-  </ion-content>
-
+</div>
+</ion-content>
