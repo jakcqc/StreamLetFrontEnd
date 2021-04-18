@@ -28,7 +28,7 @@
 </svg>
 <img id = "logo" (click) = "routePage('home')" src = "assets/nameLogoV2.png">
 <div id="loginCard">
-    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)">
     <div id = "createAccount">Create your account and start getting reccomended</div>
     
         <ion-item><ion-input class = "textStuff" formControlName="username" placeholder = "Username" required></ion-input></ion-item>
@@ -37,7 +37,8 @@
         <ion-item><ion-input class = "textStuff" formControlName="pass1" placeholder = "Password" type="password" required></ion-input></ion-item>
         <ion-item><ion-input class = "textStuff" formControlName="pass2" placeholder = "Confirm Password" type="password" required></ion-input></ion-item>
 
-         <div id = "buttonSub" class = "formInfo"><button id = "submitButton" type="submit" block>Create Account</button></div>  
+         <div id = "buttonSub" class = "formInfo"><button id = "submitButton" type="submit" >Create Account</button></div>  
+         <div id = "accountAlready" (click) = "routePage('login')"><span>Already signed up?</span></div>
     </form>
   </div>
 </div>

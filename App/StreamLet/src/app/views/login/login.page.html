@@ -28,16 +28,17 @@
 </svg>
 <img id = "logo" (click) = "routePage('home')" src = "assets/nameLogoV2.png">
 <div id="loginCard">
-    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
-    <div id = "createAccount">Create your account and start getting reccomended</div>
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit(commentForm.value)">
+    <div id = "createAccount">Login and explore your reccomended</div>
     
         <ion-item><ion-input class = "textStuff" formControlName="username" placeholder = "Username" required></ion-input></ion-item>
     
     
         <ion-item><ion-input class = "textStuff" formControlName="pass1" placeholder = "Password" type="password" required></ion-input></ion-item>
-        <ion-item><ion-input class = "textStuff" formControlName="pass2" placeholder = "Confirm Password" type="password" required></ion-input></ion-item>
 
-         <div id = "buttonSub" class = "formInfo"><button id = "submitButton" type="submit" block>Create Account</button></div>  
+         <div id = "buttonSub" class = "formInfo"><button id = "submitButton" type="submit" >Login</button></div> 
+                  <div id = "accountAlready" (click) = "routePage('signup')"><span>Don't have an acount?</span></div>
+
     </form>
   </div>
 </div>
