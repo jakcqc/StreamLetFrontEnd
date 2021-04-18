@@ -8,6 +8,7 @@ import { IonSlides} from '@ionic/angular';
 import { Card } from '../models/card.model';
 import { HttpClient } from '@angular/common/http';
 import { GenreContainer } from '../models/genre-container.model';
+import * as colorThief from 'colorThief';
 
 @Component({
   selector: 'app-home',
@@ -73,9 +74,12 @@ export class HomePage {
   movieData = "Jack Nicholson, Shelley Duvall, Danny Lloyd";
   width;
   height;
+  
+  
   constructor(navCtrl: NavController, private router: Router, 
     platform: Platform, public movies: MovieServiceService, private http: HttpClient
     ) {
+
       platform.ready().then(() => {
         this.width = platform.width();
         this.height = platform.height();
@@ -238,8 +242,9 @@ export class HomePage {
     console.log(displayer);
     
     
+    let realImage = document.querySelector<HTMLImageElement>("imageOnCard");
+    realImage.setAttribute( 'src',movieInfo.getPoster());
     
-    document.getElementById("imageOnCard").setAttribute( 'src',movieInfo.getPoster());
     document.getElementById("cardTitle").innerHTML = movieInfo.getTitle();
     document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
     document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
@@ -257,7 +262,10 @@ export class HomePage {
     movieImage.style.height = widther.toString() + "px";
     
     
-    document.getElementById("cardMain").style.backgroundColor = "black";
+    const backR = document.getElementById("cardMain");
+    backR.style.backgroundColor = "black";
+    
+
     
     
   }
