@@ -3,9 +3,9 @@
     margin: 10px;
 }
 #loginCard{
-    height: 60%;
+    height: 500px;
     width: 300px;
-    margin: 5% auto 10px auto;
+    margin: 2.5% auto 10px auto;
     border-radius: 5px;
     //border: 4px solid rgb(75, 75, 75);
     border-bottom: 5px solid white;
@@ -17,6 +17,22 @@
     font-weight: 400;
     //text-align: center;
     
+}
+#accountAlready{
+    display: block;
+    padding-top: 10px;
+    text-align: center;
+    
+    
+}
+#accountAlready span{
+    cursor: pointer;
+    transition: .2s;
+}
+#accountAlready span:hover{
+    text-decoration: underline;
+    text-decoration-color:rgb(23, 156, 189);
+    text-decoration-thickness: 2px;
 }
 .formInfo{
     margin-top: 30px;
@@ -36,6 +52,8 @@ ion-item {
     margin-top: 10px;
     font-size: 20px;
     font-style: italic;
+    
+    --border-color: rgb(27, 192, 233);
   }
  
 #submitButton{
@@ -88,7 +106,7 @@ ion-item {
     width: 100%;
     //background-color: rgb(46, 76, 207) !important;
 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(65, 104, 155, 0.9));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(36, 36, 36, 0.9));
     z-index: 3;
   
     

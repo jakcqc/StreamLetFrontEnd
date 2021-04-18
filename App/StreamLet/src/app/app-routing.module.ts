@@ -35,6 +35,16 @@ const routes: Routes = [
     redirectTo: 'find',
     pathMatch: 'full'
   },
+  {
+    path: 'login',
+    loadChildren: () => import('./views/login/login.module').then( m => m.LoginPageModule)
+  },  {
+    path: 'signup',
+    loadChildren: () => import('./views/signup/signup.module').then( m => m.SignupPageModule)
+  },
+
+  
+
 
   
   
