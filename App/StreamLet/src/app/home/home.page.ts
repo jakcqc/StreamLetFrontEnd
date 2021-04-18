@@ -252,8 +252,18 @@ export class HomePage {
     const netflixE = document.querySelector<HTMLAnchorElement>('#netflixLink');
     const huluE = document.querySelector<HTMLAnchorElement>('#netflixLink');
     const PrimeE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    //also will add in database check for whether or not user has the slected services. 
+    if(movieInfo.getNetflix() == null){
+      netflixE.style.opacity = '.1';
+    }
+    if(movieInfo.getHulu() == null){
+      huluE.style.opacity = '.1';
+    }
+    if(movieInfo.getPrime() == null){
+      PrimeE.style.opacity = '.1';
+    }
     netflixE.href = movieInfo.getNetflix();
-    // console.log(movieImage.getNetflix());
+    
     huluE.href = movieInfo.getHulu();
     PrimeE.href = movieInfo.getPrime();
 
