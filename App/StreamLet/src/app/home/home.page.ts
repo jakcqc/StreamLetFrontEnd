@@ -79,7 +79,7 @@ export class HomePage {
   constructor(navCtrl: NavController, private router: Router, 
     platform: Platform, public movies: MovieServiceService, private http: HttpClient
     ) {
-
+      
       platform.ready().then(() => {
         this.width = platform.width();
         this.height = platform.height();
@@ -149,6 +149,18 @@ export class HomePage {
     
     
   }
+  // loadFuzzy(){
+  //   var xhttp = new XMLHttpRequest();
+  // xhttp.onreadystatechange = function() {
+  //   if (this.readyState == 4 && this.status == 200) {
+
+  //     console.log(this.responseText);
+       
+  //   }
+  // };
+  // xhttp.open("GET", "assets/tester.txt", true);
+  // xhttp.send();
+  // }
   tog = 0;
   showGenre(){
     const genres = document.querySelector<HTMLElement>("#buttonHolder");
@@ -211,7 +223,7 @@ export class HomePage {
     const movieImage = document.getElementById("movieImageCard");
     let cMain = document.getElementById("contentMain");
     
-  let currentWidth;
+    let currentWidth;
     
     if(this.width < 800){
       
@@ -250,22 +262,25 @@ export class HomePage {
     document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
     document.getElementById("cardCast").innerHTML = movieInfo.getCast();
     const netflixE = document.querySelector<HTMLAnchorElement>('#netflixLink');
-    const huluE = document.querySelector<HTMLAnchorElement>('#netflixLink');
-    const PrimeE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+    const huluE = document.querySelector<HTMLAnchorElement>('#huluLink');
+    const PrimeE = document.querySelector<HTMLAnchorElement>('#primeLink');
     //also will add in database check for whether or not user has the slected services. 
-    if(movieInfo.getNetflix() == null){
+    const netflixL = movieInfo.getNetflix();
+    const huluL = movieInfo.getHulu();
+    const primeL = movieInfo.getPrime();
+
+    if( netflixL == null){
       netflixE.style.opacity = '.1';
     }
-    if(movieInfo.getHulu() == null){
+    if(huluL == null){
       huluE.style.opacity = '.1';
     }
-    if(movieInfo.getPrime() == null){
+    if(primeL == null){
       PrimeE.style.opacity = '.1';
     }
-    netflixE.href = movieInfo.getNetflix();
-    
-    huluE.href = movieInfo.getHulu();
-    PrimeE.href = movieInfo.getPrime();
+    netflixE.href = netflixL;
+    huluE.href =huluL;
+    PrimeE.href = primeL;
 
 
     const widther = this.height*.85;
@@ -395,4 +410,6 @@ export class HomePage {
     if(this.intBiography == 2)
       this.getBiography();
   }
+
+  
 }
