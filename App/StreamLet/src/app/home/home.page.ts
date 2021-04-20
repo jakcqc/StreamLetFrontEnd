@@ -75,9 +75,9 @@ export class HomePage {
   movieData = "Jack Nicholson, Shelley Duvall, Danny Lloyd";
   width;
   height;
-  currentID;
-   streamTog = {netflix: false, hulu: false, prime: false};
   
+  currentID;
+  streamTog = {netflix: false, hulu: false, prime: false};
   constructor(navCtrl: NavController, private router: Router, 
     platform: Platform, public movies: MovieServiceService, private http: HttpClient,private user: UserLoginService
     ) {
@@ -153,7 +153,7 @@ export class HomePage {
       }
       
       });
-    
+
     
   }
   // loadFuzzy(){
@@ -172,19 +172,22 @@ export class HomePage {
    this.genreContainer = this.user.getGenres(this.genreContainer);
   }
   intializeStreamers(){
+    console.log("Here");
     this.streamTog = this.user.getStreamer(this.streamTog);
+    this.genreContainer.intializeStreamers(this.streamTog);
   }
   setGenreClient(genreName){
     this.genreContainer['isOn'+genreName] = !this.genreContainer['isOn'+genreName];
 
     this.user.setGenres(genreName);
+    
   }
  
   setStreamers(stream){
     this.streamTog = this.user.getStreamer(this.streamTog);
     this.streamTog[stream] = !this.streamTog[stream];
-    console.log(this.streamTog[stream]);
-    this.user.setStreamers(stream,this.streamTog[stream])
+    this.user.setStreamers(stream,this.streamTog[stream]);
+    this.genreContainer.changeStreamers(this.streamTog);
   }
   tog = 0;
   showGenre(){
@@ -371,77 +374,11 @@ export class HomePage {
   
   }
 
-  getContent(genreNum, intNum){
-    this.http.get('http://18.188.243.225:9091/broadQuery?genre='+genreNum+'&page='+intNum).toPromise().then(
-      data => {
-        let parsedData = JSON.parse(JSON.stringify(data));
-        for(let i = 0; i < parsedData.length; i++){
-          let obj = parsedData[i];
-          let card = new Card(obj);
-          if(card.getPoster() != null)
-            this.cardsComedy.push(card);
-        }
-      }
-    );
-    this.intComedy++;
-    if(this.intComedy == 2)
-      this.getComedies();
-  }
+ 
 
-  getComedies(){
-    this.http.get('http://18.188.243.225:9091/broadQuery?genre=35&page='+this.intComedy).toPromise().then(
-      data => {
-        let parsedData = JSON.parse(JSON.stringify(data));
-        for(let i = 0; i < parsedData.length; i++){
-          let obj = parsedData[i];
-          let card = new Card(obj);
-          if(card.getPoster() != null)
-            this.genreContainer.cardsComedy.push(card);
-        }
-      }
-    );
-    this.genreContainer.intComedy++;
-    if(this.genreContainer.intComedy == 2)
-      this.getComedies();
-  }
 
-  getAction(){
-    this.http.get('http://18.188.243.225:9091/broadQuery?genre=28&page='+this.intAction).toPromise().then(
-      data => {
-        let parsedData = JSON.parse(JSON.stringify(data));
-
-        for(let i = 0; i < parsedData.length; i++){
-          let obj = parsedData[i];
-          let card = new Card(obj);
-          if(card.getPoster() != null)
-            this.cardsAction.push(card);
-        }
-      }
-    );
-    console.log(this.cardsAction);
-    this.intAction++;
-    if(this.intAction == 2)
-      this.getAction();
-  }
-
-  getBiography(){
-    this.http.get('http://18.188.243.225:9091/broadQuery?genre=1&page='+this.intAction).toPromise().then(
-      data => {
-        let parsedData = JSON.parse(JSON.stringify(data));
-
-        for(let i = 0; i < parsedData.length; i++){
-          let obj = parsedData[i];
-          let card = new Card(obj);
-          if(card.getPoster() != null)
-            this.cardsBiography.push(card);
-        }
-      }
-    );
-    console.log(this.cardsAction);
-    this.intBiography++;
-    if(this.intBiography == 2)
-      this.getBiography();
-  }
+  
+  
 
   
 }
