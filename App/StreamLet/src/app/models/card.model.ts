@@ -11,6 +11,7 @@ export class Card {
     netflixLink?: any;
     huluLink?: any;
     primeLink?: any;
+    imdbID?: string;
 
     constructor(userResponse: any){
         this.title = userResponse.title;
@@ -25,6 +26,7 @@ export class Card {
         this.netflixLink = userResponse.streamingInfo?.netflix?.us?.link;
         this.huluLink = userResponse.streamingInfo?.hulu?.us?.link;
         this.primeLink = userResponse.streamingInfo?.prime?.us?.link;
+        this.imdbID = userResponse.imdbID;
     }
 
     getTitle() {
