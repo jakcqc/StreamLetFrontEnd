@@ -114,11 +114,11 @@ isOnWestern: boolean;
     constructor(private http: HttpClient){
         this.cardsAction=[];
         this.intAction=1;
-        this.isOnAction=true;
+        this.isOnAction=false;
 
         this.cardsAdventure=[];
         this.intAdventure=1;
-        this.isOnAdventure=true;
+        this.isOnAdventure=false;
 
         this.cardsAnimation=[];
         this.intAnimation=1;
@@ -130,7 +130,7 @@ isOnWestern: boolean;
 
         this.cardsComedy=[];
         this.intComedy=1;
-        this.isOnComedy=true;
+        this.isOnComedy=false;
 
         this.cardsCrime=[];
         this.intCrime=1;
@@ -146,7 +146,7 @@ isOnWestern: boolean;
 
         this.cardsFamily=[];
         this.intFamily=1;
-        this.isOnFamily=true;
+        this.isOnFamily=false;
 
         this.cardsFantasy=[];
         this.intFantasy=1;
@@ -194,7 +194,7 @@ isOnWestern: boolean;
 
         this.cardsScienceFiction=[];
         this.intScienceFiction=1;
-        this.isOnScienceFiction=true;
+        this.isOnScienceFiction=false;
 
         this.cardsShort=[];
         this.intShort=1;

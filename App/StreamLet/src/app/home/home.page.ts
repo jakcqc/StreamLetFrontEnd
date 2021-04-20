@@ -9,6 +9,7 @@ import { Card } from '../models/card.model';
 import { HttpClient } from '@angular/common/http';
 import { GenreContainer } from '../models/genre-container.model';
 import * as colorThief from 'colorThief';
+import {UserLoginService} from '../services/user-login.service';
 
 @Component({
   selector: 'app-home',
@@ -74,11 +75,16 @@ export class HomePage {
   movieData = "Jack Nicholson, Shelley Duvall, Danny Lloyd";
   width;
   height;
-  
+   streamTog = {netflix: false, hulu: false, prime: false};
   
   constructor(navCtrl: NavController, private router: Router, 
-    platform: Platform, public movies: MovieServiceService, private http: HttpClient
+    platform: Platform, public movies: MovieServiceService, private http: HttpClient,private user: UserLoginService
     ) {
+      
+      this.user.setJson();
+      this.initializeGenres();
+      this.intializeStreamers();
+      
       
       platform.ready().then(() => {
         this.width = platform.width();
@@ -161,6 +167,24 @@ export class HomePage {
   // xhttp.open("GET", "assets/tester.txt", true);
   // xhttp.send();
   // }
+  initializeGenres(){
+   this.genreContainer = this.user.getGenres(this.genreContainer);
+  }
+  intializeStreamers(){
+    this.streamTog = this.user.getStreamer(this.streamTog);
+  }
+  setGenreClient(genreName){
+    this.genreContainer['isOn'+genreName] = !this.genreContainer['isOn'+genreName];
+
+    this.user.setGenres(genreName);
+  }
+ 
+  setStreamers(stream){
+    this.streamTog = this.user.getStreamer(this.streamTog);
+    this.streamTog[stream] = !this.streamTog[stream];
+    console.log(this.streamTog[stream]);
+    this.user.setStreamers(stream,this.streamTog[stream])
+  }
   tog = 0;
   showGenre(){
     const genres = document.querySelector<HTMLElement>("#buttonHolder");
@@ -168,7 +192,7 @@ export class HomePage {
   
 
     if(this.tog == 0){
-      bToggle.innerHTML = "Genres";
+      
     
     if(this.smallSearch == 1){
         genres.style.height = "700px";
@@ -177,7 +201,7 @@ export class HomePage {
     }
     this.tog = 1;
     }else{
-      bToggle.innerHTML = "Genres";
+      
       genres.style.height = "0";
       this.tog =0;
     }
@@ -201,6 +225,9 @@ export class HomePage {
     }
     
     
+  }
+  historyStore(){
+
   }
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
@@ -254,7 +281,7 @@ export class HomePage {
     console.log(displayer);
     
     
-    let realImage = document.querySelector<HTMLImageElement>("imageOnCard");
+    let realImage = document.querySelector<HTMLImageElement>("#imageOnCard");
     realImage.setAttribute( 'src',movieInfo.getPoster());
     
     document.getElementById("cardTitle").innerHTML = movieInfo.getTitle();

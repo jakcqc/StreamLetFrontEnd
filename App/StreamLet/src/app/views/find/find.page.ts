@@ -167,22 +167,66 @@ routePage(name){
 populateCard(movieImage,currentWidth, movieInfo){
   const displayer = document.getElementById("cardMain");
   displayer.style.display = "block";
+  console.log(displayer);
   
   
-  document.getElementById("imageOnCard").setAttribute( 'src',movieInfo.getPoster());
+  let realImage = document.querySelector<HTMLImageElement>("#imageOnCard");
+  realImage.setAttribute( 'src',movieInfo.getPoster());
+  
   document.getElementById("cardTitle").innerHTML = movieInfo.getTitle();
   document.getElementById("cardDescription").innerHTML = movieInfo.getDescript();
   document.getElementById("cardDir").innerHTML = movieInfo.getDirectors();
   document.getElementById("cardCast").innerHTML = movieInfo.getCast();
+  const netflixE = document.querySelector<HTMLAnchorElement>('#netflixLink');
+  const huluE = document.querySelector<HTMLAnchorElement>('#huluLink');
+  const PrimeE = document.querySelector<HTMLAnchorElement>('#primeLink');
+  //also will add in database check for whether or not user has the slected services. 
+  const netflixL = movieInfo.getNetflix();
+  const huluL = movieInfo.getHulu();
+  const primeL = movieInfo.getPrime();
+
+  if( netflixL == null){
+    netflixE.style.opacity = '.1';
+  }
+  if(huluL == null){
+    huluE.style.opacity = '.1';
+  }
+  if(primeL == null){
+    PrimeE.style.opacity = '.1';
+  }
+  netflixE.href = netflixL;
+  huluE.href =huluL;
+  PrimeE.href = primeL;
+
 
   const widther = this.height*.85;
   movieImage.style.height = widther.toString() + "px";
   
   
-  document.getElementById("cardMain").style.backgroundColor = "black";
-  
+  const backR = document.getElementById("cardMain");
+  backR.style.backgroundColor = "black";
+
+}
+resetNorm(){
+  let animation = Math.floor(Math.random() * Math.floor(3));
+
+  if(animation == 0){
+    document.getElementById("contentMain").style.left = "-60%";
+  }
+  if(animation == 1){
+    document.getElementById("contentMain").style.height = "0%";
+  }
+  if(animation == 2){
+    document.getElementById("contentMain").style.width = "0%";
+
+  }else{
+    document.getElementById("contentMain").style.right = "100%";
+  }
+  document.getElementById("contentWrapper").style.display = "none";
+  document.getElementById("contentMain").style.width = "0%";
+  const displayer = document.getElementById("cardMain");
+  displayer.style.display = "none";
   
 }
-
 
 }
