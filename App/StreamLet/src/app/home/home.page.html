@@ -93,6 +93,26 @@
         <div id="contentWrapper" (click)="resetNorm()"></div>
         <ion-grid>
 
+          <ion-row *ngIf="genreContainer.isOnUserHistory">
+            <div class="container">
+              <span class="genreTitle">Watch History</span>
+              <ion-slides scrollbar="true" [options]="{ slidesPerView: 'auto', zoom: false, grabCursor: true }" >
+              <ion-slide id="Action" *ngFor="let card of genreContainer.cardsUserHistory" (click)="movieInfo(card)" #slides67 (ionSlideReachEnd)="genreContainer.getUserHistory()">
+              <ion-col>
+                <ion-img class="movieImage" [src]="card.getPoster()"></ion-img>
+                <ion-label> {{ card.getImdbRating() }}/100</ion-label>
+              </ion-col>
+              </ion-slide>
+              </ion-slides>
+            </div>
+            <div class="bHolder">
+              <div class="buttons" (click)="slides67.slidePrev()">
+                < 
+              </div>
+              <div class="buttons" (click)="slides67.slideNext()"> > </div>
+            </div>
+          </ion-row>
+
 
               <ion-row *ngIf="genreContainer.isOnAction">
                 <div class="container">

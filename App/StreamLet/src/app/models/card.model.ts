@@ -29,6 +29,10 @@ export class Card {
         this.imdbID = userResponse.imdbID;
     }
 
+    getImdbID(){
+        return this.imdbID;
+    }
+
     getTitle() {
         return this.title;
     }

@@ -47,6 +47,10 @@ export class UserLoginService {
     this.addUserData();
   }
 
+  getHistory(){
+    return userData.userData.history;
+  }
+
   setGenres(gName){
     
     

@@ -111,6 +111,9 @@ cardsWestern: Card[];
 intWestern: number;
 isOnWestern: boolean;
 
+cardsUserHistory: Card[];
+isOnUserHistory: boolean;
+
 streamTog = {netflix: false, hulu: false, prime: false};
 
     constructor(private http: HttpClient){
@@ -222,12 +225,13 @@ streamTog = {netflix: false, hulu: false, prime: false};
         this.cardsWestern=[];
         this.intWestern=1;
         this.isOnWestern=false;
+
+        this.cardsUserHistory=[];
+        this.isOnUserHistory=true;
 }
 
 intializeStreamers(tog){
-    console.log("Here");
     this.streamTog = tog;
-    console.log(this.streamTog.netflix);
   }
 
   changeStreamers(tog){
@@ -317,6 +321,44 @@ intializeStreamers(tog){
       this.intWestern=1;
     
   }
+
+//   getRecommended(userHistory){
+//       userHistory.array.forEach(element => {
+//         this.http.get('http://18.188.243.225:9091/imdbSearch?id='+element).toPromise().then(
+//             data => {
+//             let parsedData = JSON.parse(JSON.stringify(data));
+//             for(let i = 0; i < parsedData.length; i++){
+//             let obj = parsedData[i];
+//             let card = new Card(obj);
+//             if(card.getPoster() != null)
+//             this.cardsUserHistory.push(card);
+            
+            
+//       });
+//   }
+//   }
+//   }
+getUserHistory(userHistory){
+
+    this.cardsUserHistory = [];
+    userHistory.forEach(element => {
+        this.http.get('http://18.188.243.225:9091/imdbSearch?id='+element).toPromise().then(
+        data => {
+            
+        let parsedData = JSON.parse(JSON.stringify(data));
+        console.log(parsedData);
+        
+        let obj = parsedData;
+        let card = new Card(obj);
+        console.log('here');
+        console.log(card);
+        if(card.getPoster() != null)
+        this.cardsUserHistory.push(card);
+        
+        }
+        );
+    });
+}
 
 getAction(){
     if(this.streamTog.netflix){

@@ -172,9 +172,9 @@ export class HomePage {
    this.genreContainer = this.user.getGenres(this.genreContainer);
   }
   intializeStreamers(){
-    console.log("Here");
     this.streamTog = this.user.getStreamer(this.streamTog);
     this.genreContainer.intializeStreamers(this.streamTog);
+    this.genreContainer.getUserHistory(this.user.getHistory());
   }
   setGenreClient(genreName){
     this.genreContainer['isOn'+genreName] = !this.genreContainer['isOn'+genreName];
@@ -232,7 +232,9 @@ export class HomePage {
   }
   historyStore(id){
     this.user.setHistory(id);
+    this.genreContainer.getUserHistory(this.user.getHistory());
   }
+
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
     let x = 0;
@@ -317,7 +319,7 @@ export class HomePage {
     huluE.href =huluL;
     PrimeE.href = primeL;
 
-    this.currentID = movieInfo.getImdbRating();
+    this.currentID = movieInfo.getImdbID();
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
     
