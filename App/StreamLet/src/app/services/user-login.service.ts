@@ -14,9 +14,11 @@ export class UserLoginService {
   }
   setJson(){
     
-    
+    if(JSON.parse(localStorage.getItem('userData')) == null){
+      this.addUserData();
+    }else{
     userData.userData = JSON.parse(localStorage.getItem('userData'));
-    
+    }
     
   }
   addUserData(){
