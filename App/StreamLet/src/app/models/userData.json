@@ -3,7 +3,7 @@
         "netflix": true,
         "hulu": true,
         "prime": true,
-        "genre" : ["Action","Adventure","Comedy","Family","ScienceFiction","Drama","Horror"]
-        
+        "genre" : ["Action","Adventure","Comedy","Family","ScienceFiction","Drama","Horror"],
+        "history" : []
     }   
 }

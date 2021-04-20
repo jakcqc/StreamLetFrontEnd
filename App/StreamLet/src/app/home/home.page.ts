@@ -75,6 +75,7 @@ export class HomePage {
   movieData = "Jack Nicholson, Shelley Duvall, Danny Lloyd";
   width;
   height;
+  currentID;
    streamTog = {netflix: false, hulu: false, prime: false};
   
   constructor(navCtrl: NavController, private router: Router, 
@@ -226,8 +227,8 @@ export class HomePage {
     
     
   }
-  historyStore(){
-
+  historyStore(id){
+    this.user.setHistory(id);
   }
   ngAfterViewInit(){
     let posters = document.getElementsByClassName("movieImage");
@@ -244,6 +245,10 @@ export class HomePage {
   search(input){
     this.router.navigate(['find', input])
 
+  }
+  history(movieInfo){
+    this.historyStore(this.currentID);
+    
   }
   movieInfo(movieInfo){
     document.getElementById("contentWrapper").style.display = "block";
@@ -295,7 +300,7 @@ export class HomePage {
     const netflixL = movieInfo.getNetflix();
     const huluL = movieInfo.getHulu();
     const primeL = movieInfo.getPrime();
-
+    const netHis = document.getElementById("netflix");
     if( netflixL == null){
       netflixE.style.opacity = '.1';
     }
@@ -309,7 +314,7 @@ export class HomePage {
     huluE.href =huluL;
     PrimeE.href = primeL;
 
-
+    this.currentID = movieInfo.getImdbRating();
     const widther = this.height*.85;
     movieImage.style.height = widther.toString() + "px";
     
@@ -317,7 +322,7 @@ export class HomePage {
     const backR = document.getElementById("cardMain");
     backR.style.backgroundColor = "black";
     
-
+   
     
     
   }
