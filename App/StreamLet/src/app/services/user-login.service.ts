@@ -26,6 +26,11 @@ export class UserLoginService {
     localStorage.setItem('userData',JSON.stringify(userData.userData));
     
   }
+  setHistory(id){
+    console.log(id);
+    userData.userData.history.push(id);
+    this.addUserData();
+  }
   setStreamers(stream, value){
     
     

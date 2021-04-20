@@ -4,7 +4,8 @@ export interface UserDataType {
     hulu: boolean;
     prime: boolean;
     //history: string[];
-    genre : {valid:boolean}
+    genre : string[];
+    history : string[];
     
     
 }
