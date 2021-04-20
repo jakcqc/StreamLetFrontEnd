@@ -24,19 +24,21 @@
     <div id="scrollMain">
         <div id="contentMain">
             <div id="cardMain">
+
                 <div id="movieImageCard">
                     <div id="stickyDiv">
                         <span class="buttons" (click)="resetNorm()">X</span>
-                        <!-- <div id="watchBarBorder">The Shining</div> -->
+                        <!-- <div id = "watchBarBorder">The Shining</div> -->
+
                     </div>
                     <img id="imageOnCard" src="">
                 </div>
 
 
                 <div id="iconHolder">
-                    <img id="netflix" src="assets/icon/netflixIcon.jpeg" (click)="streamingServiceRoute(0)">
-                    <img id="hulu" src="assets/icon/huluIcon.png" (click)="streamingServiceRoute(1)">
-                    <img id="primeVideo" src="assets/icon/primeVideoIcon.png" (click)="streamingServiceRoute(2)">
+                    <a href="" id="netflixLink" target="_blank"> <img id="netflix" src="assets/icon/netflixIcon.jpeg" > </a>
+                    <a href="" id="huluLink" target="_blank"><img id="hulu" src="assets/icon/huluIcon.png" > </a>
+                    <a href="" id="primeLink" target="_blank"><img id="primeVideo" src="assets/icon/primeVideoIcon.png"> </a>
                 </div>
                 <div id="watchBar">
                     <h2 id="cardTitle"></h2>
@@ -47,6 +49,8 @@
                 </div>
             </div>
         </div>
+
+        
 
         <div id="contentWrapper" (click)="resetNorm()"></div>
         <ion-grid>
